@@ -1,0 +1,302 @@
+{
+  "common": {
+    "loading": "Chargement...",
+    "save": "Enregistrer",
+    "update": "Mettre à jour",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "add": "Ajouter",
+    "confirm": "Confirmer",
+    "close": "Fermer",
+    "search": "Rechercher",
+    "noData": "Aucune donnée",
+    "error": "Une erreur est survenue",
+    "success": "Terminé",
+    "actions": "Actions"
+  },
+
+  "languages": {
+    "english": "English",
+    "french": "Français"
+  },
+
+  "auth": {
+    "welcomeBack": "Bon retour",
+    "loginSubtitle": "Connectez-vous à votre tableau de bord Simxel",
+    "email": "Adresse email",
+    "password": "Mot de passe",
+    "login": "Se connecter",
+    "logout": "Se déconnecter",
+    "noAccount": "Vous n'avez pas de compte ?",
+    "alreadyHaveAccount": "Vous avez déjà un compte ?",
+    "register": "Créer un compte"
+  },
+
+  "register": {
+    "title": "Créer votre compte",
+    "subtitle": "Configurez votre compte propriétaire et votre première entreprise",
+    "fullName": "Nom complet",
+    "businessDetails": "Informations sur l'entreprise",
+    "businessName": "Nom de l'entreprise",
+    "currency": "Devise",
+    "businessType": "Type d'entreprise",
+    "submit": "Créer le compte",
+    "success": "Entreprise créée !",
+    "shareSecretKey": "Donnez cette clé secrète à l'opérateur POS pour activer {{name}}.",
+    "secretKey": "Clé d’activation POS",
+    "secretKeyNote": "Conservez cette clé — elle est nécessaire pour activer le terminal POS."
+  },
+
+  "business": {
+    "welcome": "Connecté en tant que",
+    "selectPrompt": "Sélectionnez une entreprise à gérer",
+    "notActivated": "Non activé",
+    "addNew": "Ajouter une nouvelle entreprise",
+    "switchBusiness": "Changer d'entreprise"
+  },
+
+  "navbar": {
+    "dashboard": "Tableau de bord",
+    "sales": "Ventes",
+    "new": "Gestion",
+    "report": "Rapports",
+    "settings": "Paramètres"
+  },
+
+  "dashboard": {
+    "title": "Tableau de bord",
+    "subtitle": "Aperçu des performances de l'entreprise",
+    "noSales": "Aucune vente enregistrée pour cette période",
+    "noCharts": "Aucun graphique disponible",
+    "chart": "Revenus",
+    "payments": "Modes de paiement",
+    "totalCollected": "Total encaissé",
+    "salesMix": "Répartition des ventes",
+    "catBreakdown": "Répartition par catégorie",
+    "topPerformers": "Meilleurs performeurs",
+    "period": {
+      "today": "Aujourd'hui",
+      "yesterday": "Hier",
+      "thisWeek": "Cette semaine",
+      "thisMonth": "Ce mois",
+      "thisYear": "Cette année"
+    },
+    "kpi": {
+      "revenue": "Revenus",
+      "commission": "Commission",
+      "sales": "Ventes",
+      "avgCart": "Panier moyen"
+    }
+  },
+
+  "sales": {
+    "title": "Ventes",
+    "subtitle": "Historique des transactions",
+    "total": "transactions totales",
+    "searchPlaceholder": "Rechercher par référence ou article...",
+    "noSales": "Aucune vente trouvée",
+    "date": "Date",
+    "ref": "Référence",
+    "items": "Articles",
+    "cashier": "Caissier",
+    "payment": "Paiement",
+    "amount": "Montant"
+  },
+
+  "reports": {
+    "title": "Rapports",
+    "subtitle": "Analyses et exportations",
+    "period": "Période",
+    "generate": "Générer",
+    "summary": "Résumé des ventes",
+    "financialBalance": "Bilan financier",
+    "topItems": "Articles les plus vendus",
+    "staffPerformance": "Performance du personnel",
+    "totalRevenue": "Revenu total",
+    "avgTransaction": "Transaction moyenne",
+    "paymentBreakdown": "Modes de paiement",
+    "transactions": "transactions",
+    "revenue": "Revenus",
+    "expenses": "Dépenses",
+    "netProfit": "Bénéfice net",
+    "expenseBreakdown": "Répartition des dépenses",
+    "employee": "Employé",
+    "prestations": "Prestations",
+    "generated": "Revenus générés",
+    "commission": "Commission",
+    "noData": "Aucune donnée pour cette période. Cliquez sur Générer."
+  },
+
+  "management": {
+    "employees": "Employés",
+    "products": "Produits",
+    "services": "Services",
+    "packages": "Forfaits",
+    "expenses": "Dépenses"
+  },
+
+  "employees": {
+    "title": "Employés",
+    "subtitle": "Gestion des profils",
+    "addEmployee": "Ajouter un employé",
+    "commission": "Commission",
+    "role": "Rôle",
+    "dob": "Date de naissance",
+    "noEmployees": "Aucun employé pour le moment"
+  },
+
+  "products": {
+    "title": "Inventaire du stock",
+    "subtitle": "Gestion des produits",
+    "addProduct": "Ajouter un produit",
+    "name": "Nom du produit",
+    "salePrice": "Prix de vente",
+    "unitCost": "Coût unitaire",
+    "stock": "En stock",
+    "minAlert": "Alerte stock minimum",
+    "outOfStock": "Rupture de stock",
+    "lowStock": "Stock faible",
+    "inStock": "en stock",
+    "noProducts": "Aucun produit pour le moment"
+  },
+
+  "services": {
+    "title": "Services",
+    "subtitle": "Gestion des services",
+    "addService": "Ajouter un service",
+    "name": "Nom du service",
+    "price": "Prix",
+    "noServices": "Aucun service pour le moment",
+    "noServicesAvailable": "Aucun service disponible"
+  },
+
+  "packages": {
+    "title": "Forfaits & Offres",
+    "subtitle": "Gestion des offres combinées",
+    "addPackage": "Ajouter un forfait",
+    "included": "Services inclus",
+    "noServices": "Aucun service lié",
+    "noPackages": "Aucun forfait pour le moment"
+  },
+
+  "expenses": {
+    "title": "Journal des dépenses",
+    "subtitle": "Sorties de trésorerie en temps réel",
+    "addExpense": "Nouvelle dépense",
+    "totalExpenses": "Total des dépenses",
+    "thisMonth": "Ce mois",
+    "noExpenses": "Aucune dépense enregistrée",
+    "type": "Type de dépense",
+    "deleted": "Dépense supprimée",
+    "updated": "Dépense mise à jour",
+    "added": "Dépense ajoutée",
+    "types": {
+      "Rent": "Loyer",
+      "Electricity": "Électricité",
+      "Water": "Eau",
+      "Supplies": "Fournitures",
+      "Salary": "Salaire",
+      "Transport": "Transport",
+      "Maintenance": "Maintenance",
+      "Marketing": "Marketing",
+      "Other": "Autre"
+    }
+  },
+
+  "settings": {
+    "title": "Paramètres",
+    "businessInfo": "Informations de l'entreprise",
+    "posConfig": "Configuration POS à distance",
+    "posStatus": "Statut du POS",
+    "synced": "Synchronisé",
+    "pendingSync": "Synchronisation en attente",
+    "notActivated": "Non activé",
+    "managerPassword": "Mot de passe manager (caissier)",
+    "adminPassword": "Mot de passe administrateur",
+    "currentAdminPw": "Mot de passe admin actuel",
+    "newManagerPw": "Nouveau mot de passe manager",
+    "newAdminPw": "Nouveau mot de passe admin",
+    "fullReset": "Réinitialisation complète des mots de passe",
+    "fullResetNote": "Utilisez ceci si l'opérateur POS a perdu tout accès. Les deux mots de passe seront remplacés lors de la prochaine synchronisation.",
+    "resetAll": "Réinitialiser les deux mots de passe",
+    "passwordUpdated": "Mot de passe mis à jour. Le POS l'appliquera lors de la prochaine synchronisation.",
+    "ownerAccount": "Compte propriétaire",
+    "changeOwnerPassword": "Changer le mot de passe du tableau de bord",
+    "currentPassword": "Mot de passe actuel",
+    "newPassword": "Nouveau mot de passe",
+    "switchBusiness": "Changer d'entreprise",
+    "themes": {
+      "system": "Système",
+      "light": "Clair",
+      "dark": "Sombre"
+    }
+  },
+
+  "ticket": {
+    "title": "Ticket",
+    "noItems": "Aucun article",
+    "total": "Total",
+    "payment": "Répartition du paiement",
+    "remaining": "Restant",
+    "overpaid": "Trop payé de",
+    "exact": "Montant exact",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "parkTicket": "Mettre le ticket en attente",
+    "newTicket": "Nouveau ticket"
+  },
+
+  "receipt": {
+    "saleConfirmed": "Vente confirmée !",
+    "receiptGenerated": "Le reçu a été généré avec succès.",
+    "noReceipt": "Vente confirmée — aucun reçu généré.",
+    "openReceipt": "Ouvrir le reçu",
+    "print": "Imprimer",
+    "printDirect": "Impression directe (sans dialogue)",
+    "closeWithoutPrinting": "Fermer sans imprimer",
+    "opening": "Ouverture…",
+    "printing": "Impression…",
+    "printSent": "Reçu envoyé à l'imprimante",
+    "printError": "Impossible d'imprimer le reçu",
+    "openError": "Impossible d'ouvrir le reçu"
+  },
+
+  "sync": {
+    "online": "Synchronisé",
+    "syncing": "Synchronisation…",
+    "unreachable": "Serveur injoignable",
+    "offline": "Hors ligne",
+    "lastSync": "Dernière synchronisation :",
+    "clickToRetry": "Cliquez pour réessayer"
+  },
+
+  "pos": {
+    "productSale": "Vente de produit",
+    "serviceSale": "Vente de service",
+    "packageSale": "Vente de forfait",
+    "searchProducts": "Rechercher des produits…",
+    "searchServices": "Rechercher des services…",
+    "searchPackages": "Rechercher des forfaits…",
+    "noResults": "Aucun résultat",
+    "chooseEmployee": "Choisir un employé",
+    "todayExpenses": "Aujourd'hui",
+    "noProducts": "Aucun produit trouvé"
+  },
+
+  "files": {
+    "savedFiles": "Fichiers enregistrés",
+    "refresh": "Actualiser",
+    "openFolder": "Ouvrir le dossier",
+    "receipts": "Reçus",
+    "exports": "Exports",
+    "open": "Ouvrir",
+    "print": "Imprimer",
+    "noReceipts": "Aucun reçu trouvé.",
+    "noExports": "Aucun export trouvé.",
+    "desktopOnly": "La gestion des fichiers est disponible uniquement dans l'application desktop.",
+    "printSuccess": "Reçu envoyé à l'imprimante",
+    "printError": "Échec de l'impression",
+    "openError": "Impossible d'ouvrir le fichier"
+  }
+}

@@ -1,43 +1,73 @@
-// src/App.tsx
+
 import { useState } from "react";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
+import BottomNavbar from "./components/navigations/BottomNavbar";
 import Navbar from "./components/navigations/Navbar";
-import Sidebar from "./components/navigations/Sidebar";
-import ChooseProduct from "./components/POS/ChooseProduct";
-import POSLogin from "./pages/POSLogin";
-import POSAdminLogin from "./pages/POSAdminLogin";
-import AdminPage from "./pages/AdminPAge";
+import Dashboard from "./components/Management/Dashboard";
+import New from "./components/New";
+import Report from "./components/Report";
+import Sales from "./components/Sales";
+import Settings from "./components/Settings";
+import LoginPage from "./pages/LoginPage";
+import BusinessSelectorPage from "./pages/BusinessSelectorPage";
 
-const navItems = [
-  { name: "Services", href: "/service-sale" },
-  { name: "Products", href: "/product-sale" },
-];
-function App() {
-  const [activePath, setActivePath] = useState("/");
+export type TabKey = "Dashboard" | "Sales" | "New" | "Report" | "Settings";
 
-  const loading: boolean = false;
-  if (loading) {
-    return (
-      <div className="h-screen w-screen flex flex-col items-center justify-center bg-base-100">
-        <span className="loading loading-ball loading-xl text-accent" />
-        <p className="mt-4 font-black tracking-[0.4em] text-[10px] opacity-50">
-          Starting Simxel
-        </p>
-      </div>
-    );
-  }
+// The main app shell — wraps all authenticated content
+const AppShell = () => {
+  const [activeTab, setActiveTab] = useState<TabKey>("Dashboard");
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case "Dashboard": return <Dashboard />;
+      case "Sales":     return <Sales />;
+      case "New":       return <New />;
+      case "Report":    return <Report />;
+      case "Settings":  return <Settings />;
+      default:          return <Dashboard />;
+    }
+  };
+
   return (
     <div className="min-h-screen bg-base-100 font-sans text-base-content">
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/login" element={<POSLogin />} />
-          <Route path="/" element={<ChooseProduct />} />
-          <Route path="/admin/login" element={<POSAdminLogin/>} />
-          <Route path="/admin" element={<AdminPage/>}/>
-        </Routes>
-      </Router>
+      <Navbar />
+      <div className="mt-16 pb-20">
+        {renderContent()}
+      </div>
+      <BottomNavbar
+        activeTab={activeTab}
+        setActiveTab={(tab) => setActiveTab(tab as TabKey)}
+      />
     </div>
+  );
+};
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        {/* Public */}
+        <Route path="/login" element={<LoginPage />} />
+
+        {/* Auth required, no business selection needed yet */}
+        <Route path="/select-business" element={<BusinessSelectorPage />} />
+
+        {/* Fully protected — needs auth + selected business */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <AppShell />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Catch-all → dashboard (ProtectedRoute will redirect to login if needed) */}
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

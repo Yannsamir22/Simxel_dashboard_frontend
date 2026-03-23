@@ -1,11 +1,97 @@
 @import "tailwindcss";
 @plugin "daisyui" {
   themes:
-    winter, dark, light, cupcake, forest, synthwave, corporate, dracula, night,
-    retro, cyberpunk, valentine, halloween, garden, lofi, pastel, fantasy,
-    wireframe, black, luxury, emerald;
+    simxel, simxel-dark
 }
 
+/* Light theme */
+@plugin "daisyui/theme" {
+  name: "simxel";
+  default: true;
+  color-scheme: light;
+
+  /* Primary = Blue */
+  --color-primary: oklch(from #0197f6 l c h);
+  --color-primary-content: #ffffff;
+
+  /* Secondary = Green */
+  --color-secondary: oklch(from #16a34a l c h);
+  --color-secondary-content: #ffffff;
+
+  /* Accent - cyan tint */
+  --color-accent: oklch(from #0ed8e3 l c h);
+  --color-accent-content: #ffffff;
+
+  /* Neutrals */
+  --color-neutral: oklch(form #374151 l c h);
+  --color-neutral-content: #ffffff;
+
+  /* Base surfaces */
+  --color-base-100: #ffffff;
+  --color-base-200: #f1f5f9;
+  --color-base-300: #e2e8f0;
+  --color-base-content: oklch(from #1e293b l c h);
+
+  /* Semantic */
+  --color-info: oklch(from #0ea5e9 l c h);
+  --color-success: oklch(from #16a34a l c h);
+  --color-warning: oklch(from #f59e0b l c h);
+  --color-error: oklch(from #ef4444 l c h);
+
+  --color-info-content: #ffffff;
+  --color-success-content: #ffffff;
+  --color-warning-content: #ffffff;
+  --color-error-content: #ffffff;
+
+  --radius-selector: 0.5rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.75rem;
+}
+
+/* Dark theme  */
+@plugin "daisyui/theme" {
+  name: "simxel-dark";
+  color-scheme: dark;
+
+  /* Primary = Blue (same hue, slightly lighter for dark bg) */
+  --color-primary: oklch(from #0197f6 l c h);
+  --color-primary-content: #ffffff;
+
+  /* Secondary = Green */
+  --color-secondary: oklch(from #16a34a l c h);
+  --color-secondary-content: #ffffff;
+
+  /* Accent */
+  --color-accent: oklch(from #0ed8e3 l c h);
+  --color-accent-content: #ffffff;
+
+  /* Neutrals */
+  --color-neutral: oklch(from #94a3b8 l c h);
+  --color-neutral-content: #0f172a;
+
+  /* Base surfaces — dark navy */
+  --color-base-100: #1d232a;
+  --color-base-200: #191e24;
+  --color-base-300: #15191e;
+  --color-base-content: oklch(from #e2e8f0 l c h);
+
+  /* Semantic */
+  --color-info: oklch(from #38bdf8 l c h);
+  --color-success: oklch(from #4ade80 l c h);
+  --color-warning: oklch(from #fbbf24 l c h);
+  --color-error: oklch(from #f87171 l c h);
+
+  --color-info-content: #0f172a;
+  --color-success-content: #0f172a;
+  --color-warning-content: #0f172a;
+  --color-error-content: #0f172a;
+
+  --radius-selector: 0.5rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.75rem;
+}
+
+/* Global resets */
 * {
   @apply font-sans;
   -ms-overflow-style: none;
@@ -13,24 +99,10 @@
 }
 
 *::selection {
-  color: #0197f6;
-}
-
-@layer base {
-  :root {
-    --color-primary: #0197f6;
-    --color-primary-focus: #0197f6;
-    --color-primary-content: #ffffff;
-    --color-secondary: #0692d9;
-    --color-secondary-focus: #0692d9;
-    --color-secondary-content: #ffffff;
-    --color-accent: #0ed8e3;
-    --color-accent-focus: #0ed8e3;
-    --color-accent-content: #ffffff;
-  }
+  background-color: #0197f6;
+  color: #ffffff;
 }
 
 button {
   cursor: pointer;
-
 }

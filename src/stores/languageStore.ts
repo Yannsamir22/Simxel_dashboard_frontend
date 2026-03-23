@@ -1,16 +1,24 @@
-import { create } from 'zustand';
+import { create } from "zustand";
 
+type Lang = "en" | "fr";
 interface LanguageStore {
-  language: 'en' | 'fr';
-  setLanguage: (lang: 'en' | 'fr') => void;
+  language: Lang;
+  setLanguage: (lang: Lang) => void;
   toggleLanguage: () => void;
 }
 
 export const useLanguageStore = create<LanguageStore>((set) => ({
-  language: 'en',
-  setLanguage: (lang) => set({ language: lang }),
+  language: (localStorage.getItem("lang") as Lang) ?? "en",
+  setLanguage: (lang) => {
+    localStorage.setItem("lang", lang);
+    set({ language: lang });
+  },
   toggleLanguage: () =>
-    set((state) => ({
-      language: state.language === 'en' ? 'fr' : 'en',
-    })),
+    set((state) => {
+      const next: Lang = state.language === "en" ? "fr" : "en";
+      localStorage.setItem("lang", next);
+      return {
+        language: next,
+      };
+    }),
 }));

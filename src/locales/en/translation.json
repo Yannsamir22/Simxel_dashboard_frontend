@@ -1,0 +1,302 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "update": "Update",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "confirm": "Confirm",
+    "close": "Close",
+    "search": "Search",
+    "noData": "No data",
+    "error": "An error occurred",
+    "success": "Done",
+    "actions": "Actions"
+  },
+
+  "languages": {
+    "english": "English",
+    "french": "Français"
+  },
+
+  "auth": {
+    "welcomeBack": "Welcome back",
+    "loginSubtitle": "Sign in to your Simxel dashboard",
+    "email": "Email address",
+    "password": "Password",
+    "login": "Sign in",
+    "logout": "Sign out",
+    "noAccount": "Don't have an account?",
+    "alreadyHaveAccount": "Already have an account?",
+    "register": "Create account"
+  },
+
+  "register": {
+    "title": "Create your account",
+    "subtitle": "Set up your owner account and first business",
+    "fullName": "Full name",
+    "businessDetails": "Business details",
+    "businessName": "Business name",
+    "currency": "Currency",
+    "businessType": "Business type",
+    "submit": "Create account",
+    "success": "Business created!",
+    "shareSecretKey": "Give this secret key to your POS operator to activate {{name}}.",
+    "secretKey": "POS Activation Key",
+    "secretKeyNote": "Save this key — it is needed to activate the POS device."
+  },
+
+  "business": {
+    "welcome": "Signed in as",
+    "selectPrompt": "Select a business to manage",
+    "notActivated": "Not activated",
+    "addNew": "Add a new business",
+    "switchBusiness": "Switch business"
+  },
+
+  "navbar": {
+    "dashboard": "Dashboard",
+    "sales": "Sales",
+    "new": "Manage",
+    "report": "Reports",
+    "settings": "Settings"
+  },
+
+  "dashboard": {
+    "title": "Dashboard",
+    "subtitle": "Business Performance Overview",
+    "noSales": "No sales recorded for this period",
+    "noCharts": "No charts available",
+    "chart": "Revenue",
+    "payments": "Payment Methods",
+    "totalCollected": "Total Collected",
+    "salesMix": "Sales mix",
+    "catBreakdown": "Category breakdown",
+    "topPerformers": "Top Performers",
+    "period": {
+      "today": "Today",
+      "yesterday": "Yesterday",
+      "thisWeek": "This week",
+      "thisMonth": "This month",
+      "thisYear": "This year"
+    },
+    "kpi": {
+      "revenue": "Revenue",
+      "commission": "Commission",
+      "sales": "Sales",
+      "avgCart": "Average Cart"
+    }
+  },
+
+  "sales": {
+    "title": "Sales",
+    "subtitle": "Transaction history",
+    "total": "total transactions",
+    "searchPlaceholder": "Search by reference or item...",
+    "noSales": "No sales found",
+    "date": "Date",
+    "ref": "Reference",
+    "items": "Items",
+    "cashier": "Cashier",
+    "payment": "Payment",
+    "amount": "Amount"
+  },
+
+  "reports": {
+    "title": "Reports",
+    "subtitle": "Analytics & exports",
+    "period": "Period",
+    "generate": "Generate",
+    "summary": "Sales summary",
+    "financialBalance": "Financial balance",
+    "topItems": "Top items",
+    "staffPerformance": "Staff performance",
+    "totalRevenue": "Total revenue",
+    "avgTransaction": "Avg. transaction",
+    "paymentBreakdown": "Payment methods",
+    "transactions": "transactions",
+    "revenue": "Revenue",
+    "expenses": "Expenses",
+    "netProfit": "Net profit",
+    "expenseBreakdown": "Expense breakdown",
+    "employee": "Employee",
+    "prestations": "Prestations",
+    "generated": "Revenue generated",
+    "commission": "Commission",
+    "noData": "No data for this period. Click Generate."
+  },
+
+  "management": {
+    "employees": "Employees",
+    "products": "Products",
+    "services": "Services",
+    "packages": "Packages",
+    "expenses": "Expenses"
+  },
+
+  "employees": {
+    "title": "Employees",
+    "subtitle": "Profile Management",
+    "addEmployee": "Add Employee",
+    "commission": "Commission",
+    "role": "Role",
+    "dob": "Date of Birth",
+    "noEmployees": "No employees yet"
+  },
+
+  "products": {
+    "title": "Stock Inventory",
+    "subtitle": "Product Management",
+    "addProduct": "Add Product",
+    "name": "Product Name",
+    "salePrice": "Selling Price",
+    "unitCost": "Unit Cost",
+    "stock": "In Stock",
+    "minAlert": "Low Stock Alert",
+    "outOfStock": "Out of stock",
+    "lowStock": "Low stock",
+    "inStock": "in stock",
+    "noProducts": "No products yet"
+  },
+
+  "services": {
+    "title": "Service Panel",
+    "subtitle": "Service Management",
+    "addService": "Add Service",
+    "name": "Service Name",
+    "price": "Price",
+    "noServices": "No services yet",
+    "noServicesAvailable": "No services available"
+  },
+
+  "packages": {
+    "title": "Package & Offers",
+    "subtitle": "Combined Offers Management",
+    "addPackage": "Add Package",
+    "included": "Included Services",
+    "noServices": "No linked services",
+    "noPackages": "No packages yet"
+  },
+
+  "expenses": {
+    "title": "Expenses Journal",
+    "subtitle": "Real-time Cash Outflow",
+    "addExpense": "New Expense",
+    "totalExpenses": "Total Expenses",
+    "thisMonth": "This Month",
+    "noExpenses": "No expenses recorded",
+    "type": "Expense Type",
+    "deleted": "Expense deleted",
+    "updated": "Expense updated",
+    "added": "Expense added",
+    "types": {
+      "Rent": "Rent",
+      "Electricity": "Electricity",
+      "Water": "Water",
+      "Supplies": "Supplies",
+      "Salary": "Salary",
+      "Transport": "Transport",
+      "Maintenance": "Maintenance",
+      "Marketing": "Marketing",
+      "Other": "Other"
+    }
+  },
+
+  "settings": {
+    "title": "Settings",
+    "businessInfo": "Business information",
+    "posConfig": "Remote POS configuration",
+    "posStatus": "POS status",
+    "synced": "Synced",
+    "pendingSync": "Pending sync",
+    "notActivated": "Not activated",
+    "managerPassword": "Manager (cashier) password",
+    "adminPassword": "Admin password",
+    "currentAdminPw": "Current admin password",
+    "newManagerPw": "New manager password",
+    "newAdminPw": "New admin password",
+    "fullReset": "Full password reset",
+    "fullResetNote": "Use this if the POS operator has lost all access. Both passwords will be replaced on next sync.",
+    "resetAll": "Reset both passwords",
+    "passwordUpdated": "Password updated. The POS will apply it on next sync.",
+    "ownerAccount": "Owner account",
+    "changeOwnerPassword": "Change dashboard password",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "switchBusiness": "Switch business",
+    "themes": {
+      "system": "System",
+      "light": "Light",
+      "dark": "Dark"
+    }
+  },
+
+  "ticket": {
+    "title": "Ticket",
+    "noItems": "No items yet",
+    "total": "Total",
+    "payment": "Payment Repartition",
+    "remaining": "Remaining",
+    "overpaid": "Overpaid by",
+    "exact": "Exact amount",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "parkTicket": "Park ticket",
+    "newTicket": "New ticket"
+  },
+
+  "receipt": {
+    "saleConfirmed": "Sale Confirmed!",
+    "receiptGenerated": "The receipt has been generated successfully.",
+    "noReceipt": "Sale confirmed — no receipt generated.",
+    "openReceipt": "Open Receipt",
+    "print": "Print",
+    "printDirect": "Direct print (no dialog)",
+    "closeWithoutPrinting": "Close without printing",
+    "opening": "Opening…",
+    "printing": "Printing…",
+    "printSent": "Receipt sent to printer",
+    "printError": "Could not print receipt",
+    "openError": "Could not open receipt"
+  },
+
+  "sync": {
+    "online": "Synced",
+    "syncing": "Syncing…",
+    "unreachable": "Server unreachable",
+    "offline": "Offline",
+    "lastSync": "Last sync:",
+    "clickToRetry": "Click to retry"
+  },
+
+  "pos": {
+    "productSale": "Product Sale",
+    "serviceSale": "Service Sale",
+    "packageSale": "Package Sale",
+    "searchProducts": "Search products…",
+    "searchServices": "Search services…",
+    "searchPackages": "Search packages…",
+    "noResults": "No results",
+    "chooseEmployee": "Choose employee",
+    "todayExpenses": "Today",
+    "noProducts": "No products found"
+  },
+
+  "files": {
+    "savedFiles": "Saved Files",
+    "refresh": "Refresh",
+    "openFolder": "Open Folder",
+    "receipts": "Receipts",
+    "exports": "Exports",
+    "open": "Open",
+    "print": "Print",
+    "noReceipts": "No receipts found.",
+    "noExports": "No exports found.",
+    "desktopOnly": "File management is only available in the desktop app.",
+    "printSuccess": "Receipt sent to printer",
+    "printError": "Print failed",
+    "openError": "Could not open file"
+  }
+}

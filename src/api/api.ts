@@ -1,0 +1,35 @@
+import axios from "axios";
+import { useAuthStore } from "../stores/authStore";
+import { useBusinessStore } from "../stores/businessStore";
+
+export const axiosInstance = axios.create({
+  baseURL: "http://localhost:4000/api",
+  withCredentials: false,
+});
+
+axiosInstance.interceptors.request.use((config) => {
+  const token = useAuthStore.getState().token;
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  const businessId = useBusinessStore.getState().selectedBusinessId;
+  if (businessId && config.url?.includes(":businessId")) {
+    config.url = config.url.replace(":businessId", businessId);
+  }
+
+  return config;
+});
+
+// Resposne interceptor
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      useAuthStore.getState().logout();
+      window.location.href = "/login";
+    }
+
+    return Promise.reject(error);
+  },
+);
