@@ -41,14 +41,19 @@ const LoginPage = () => {
 
       setAuth(res.token, res.owner, res.businesses);
 
-      // If owner only has one activated business → go straight to dashboard
       const activated = res.businesses.filter(
         (b: { isActivated: boolean }) => b.isActivated
       );
-      if (activated.length === 1) {
+
+      if (activated.length === 0) {
+        // M2: No activated businesses — navigate to selector which shows the activation notice
+        navigate("/select-business");
+      } else if (activated.length === 1) {
+        // Only one activated business — skip selector
         selectBusiness(activated[0]);
         navigate("/dashboard");
       } else {
+        // Multiple activated businesses — let user pick
         navigate("/select-business");
       }
     } catch (err: any) {

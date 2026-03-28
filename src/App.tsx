@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import BottomNavbar from "./components/navigations/BottomNavbar";
@@ -11,8 +11,18 @@ import Sales from "./components/Sales";
 import Settings from "./components/Settings";
 import LoginPage from "./pages/LoginPage";
 import BusinessSelectorPage from "./pages/BusinessSelectorPage";
+import { useAuthStore } from "./stores/authStore";
+import { AuthService } from "./services/authService";
 
 export type TabKey = "Dashboard" | "Sales" | "New" | "Report" | "Settings";
+
+// Guard: requires login but does NOT require a selected business
+// (used for the business selector page itself — M5 fix)
+const AuthOnlyRoute = ({ children }: { children: React.ReactNode }) => {
+  const { isAuthenticated } = useAuthStore();
+  if (!isAuthenticated) return <Navigate to="/login" replace />;
+  return <>{children}</>;
+};
 
 // The main app shell — wraps all authenticated content
 const AppShell = () => {
@@ -44,14 +54,33 @@ const AppShell = () => {
 };
 
 function App() {
+  const { isAuthenticated, logout } = useAuthStore();
+
+  // M6 — Session check: verify stored token is still valid on every app load
+  useEffect(() => {
+    if (!isAuthenticated) return;
+    AuthService.getMe().catch(() => {
+      // Token is expired or invalid — clear session and redirect to login
+      logout();
+      window.location.href = "/login";
+    });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
     <BrowserRouter>
       <Routes>
         {/* Public */}
         <Route path="/login" element={<LoginPage />} />
 
-        {/* Auth required, no business selection needed yet */}
-        <Route path="/select-business" element={<BusinessSelectorPage />} />
+        {/* Auth required, but no business selection needed yet — M5 fix */}
+        <Route
+          path="/select-business"
+          element={
+            <AuthOnlyRoute>
+              <BusinessSelectorPage />
+            </AuthOnlyRoute>
+          }
+        />
 
         {/* Fully protected — needs auth + selected business */}
         <Route
@@ -71,4 +100,4 @@ function App() {
   );
 }
 
-export default App;
+export default App;

@@ -57,54 +57,71 @@ const BusinessSelectorPage = () => {
 
           {/* Business list */}
           <div className="space-y-3">
-            {businesses.map((business) => {
-              const isSelected = business.id === selectedBusinessId;
-              const isDisabled = !business.isActivated;
+            {businesses.length === 0 ? (
+              <div className="text-center py-10 opacity-50">
+                <p className="text-sm">No businesses found.</p>
+              </div>
+            ) : (
+              businesses.map((business) => {
+                const isSelected = business.id === selectedBusinessId;
+                const isDisabled = !business.isActivated;
 
-              return (
-                <button
-                  key={business.id}
-                  onClick={() => handleSelect(business)}
-                  disabled={isDisabled}
-                  className={`
-                    w-full flex items-center gap-4 p-4 rounded-xl border transition-all text-left
-                    ${isDisabled
-                      ? "opacity-40 cursor-not-allowed border-base-300 bg-base-200"
-                      : isSelected
-                        ? "border-primary bg-primary/5 shadow-sm"
-                        : "border-base-300 bg-base-200 hover:border-primary/50 hover:bg-base-300/50"
-                    }
-                  `}
-                >
-                  {/* Icon */}
-                  <div className={`p-2.5 rounded-lg ${isSelected ? "bg-primary text-primary-content" : "bg-base-300"}`}>
-                    <Building2 size={20} />
-                  </div>
+                return (
+                  <button
+                    key={business.id}
+                    onClick={() => handleSelect(business)}
+                    disabled={isDisabled}
+                    className={`
+                      w-full flex items-center gap-4 p-4 rounded-xl border transition-all text-left
+                      ${isDisabled
+                        ? "opacity-40 cursor-not-allowed border-base-300 bg-base-200"
+                        : isSelected
+                          ? "border-primary bg-primary/5 shadow-sm"
+                          : "border-base-300 bg-base-200 hover:border-primary/50 hover:bg-base-300/50"
+                      }
+                    `}
+                  >
+                    {/* Icon */}
+                    <div className={`p-2.5 rounded-lg ${isSelected ? "bg-primary text-primary-content" : "bg-base-300"}`}>
+                      <Building2 size={20} />
+                    </div>
 
-                  {/* Info */}
-                  <div className="flex-1 min-w-0">
-                    <p className="font-black truncate">{business.name}</p>
-                    <p className="text-xs opacity-50 mt-0.5">
-                      {business.type ?? "—"} · {business.currency}
-                    </p>
-                  </div>
+                    {/* Info */}
+                    <div className="flex-1 min-w-0">
+                      <p className="font-black truncate">{business.name}</p>
+                      <p className="text-xs opacity-50 mt-0.5">
+                        {business.type ?? "—"} · {business.currency}
+                      </p>
+                    </div>
 
-                  {/* Status */}
-                  <div className="flex items-center gap-2 shrink-0">
-                    {isDisabled ? (
-                      <span className="badge badge-warning badge-sm text-[10px]">
-                        {t("business.notActivated")}
-                      </span>
-                    ) : isSelected ? (
-                      <CheckCircle2 size={18} className="text-primary" />
-                    ) : (
-                      <ChevronRight size={18} className="opacity-30" />
-                    )}
-                  </div>
-                </button>
-              );
-            })}
+                    {/* Status */}
+                    <div className="flex items-center gap-2 shrink-0">
+                      {isDisabled ? (
+                        <span className="badge badge-warning badge-sm font-bold p-2 text-[10px]">
+                          {t("business.notActivated")}
+                        </span>
+                      ) : isSelected ? (
+                        <CheckCircle2 size={18} className="text-primary" />
+                      ) : (
+                        <ChevronRight size={18} className="opacity-30" />
+                      )}
+                    </div>
+                  </button>
+                );
+              })
+            )}
           </div>
+
+          {/* M1 — Pending activation notice: shown when all businesses are not activated */}
+          {businesses.length > 0 && businesses.every((b) => !b.isActivated) && (
+            <div className="mt-6 p-4 rounded-xl border border-warning/30 bg-warning/5 text-center">
+              <p className="text-sm font-bold opacity-70 mb-1">POS Not Activated Yet</p>
+              <p className="text-xs opacity-50 leading-relaxed">
+                Enter your Simxel License Key in the POS client to activate your business.
+                Once activated, you can log in here.
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>

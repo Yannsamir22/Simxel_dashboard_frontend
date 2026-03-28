@@ -3,7 +3,7 @@ import { useAuthStore } from "../stores/authStore";
 import { useBusinessStore } from "../stores/businessStore";
 
 export const axiosInstance = axios.create({
-  baseURL: "http://localhost:4000/api",
+  baseURL: (import.meta.env.VITE_API_URL || "http://localhost:4000") + "/api",
   withCredentials: false,
 });
 
@@ -21,7 +21,7 @@ axiosInstance.interceptors.request.use((config) => {
   return config;
 });
 
-// Resposne interceptor
+// Response interceptor
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
