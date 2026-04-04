@@ -1,4 +1,4 @@
-// src/components/navigations/BottomNavbar.tsx
+
 import {
   CircleDollarSign,
   LayoutDashboard,
@@ -21,7 +21,7 @@ const BottomNavbar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
   const menu = [
     { key: "Dashboard", label: t("navbar.dashboard"), icon: LayoutDashboard },
     { key: "Sales",     label: t("navbar.sales"),     icon: CircleDollarSign },
-    { key: "New",       label: t("navbar.new"),        icon: PlusSquare },
+    { key: "New",       label: t("navbar.new"),        icon: PlusSquare, isCentered: true },
     { key: "Report",    label: t("navbar.report"),     icon: Sheet },
     { key: "Settings",  label: t("navbar.settings"),   icon: Settings },
   ];

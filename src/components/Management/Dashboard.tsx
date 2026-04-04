@@ -49,22 +49,29 @@ const Dashboard: React.FC = () => {
         }
       } catch (err: any) {
         if (!cancelled)
-          setError(err.response?.data?.error ?? "Failed to load dashboard data");
+          setError(err.response?.data?.error ?? t("dashboard.loadError"));
       } finally {
         if (!cancelled) setLoading(false);
       }
     };
     load();
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, [period]);
 
   if (loading) return <Loading message={t("common.loading")} />;
 
-  const isEmpty = !loading && !error && data && (data.overview?.[0]?.value ?? 0) === 0;
+  const isEmpty =
+    !loading && !error && data && (data.overview?.[0]?.value ?? 0) === 0;
 
   return (
     <div className="space-y-5 animate-in fade-in duration-300">
-      <StatsHeader period={period} onPeriodChange={setPeriod} loading={loading} />
+      <StatsHeader
+        period={period}
+        onPeriodChange={setPeriod}
+        loading={loading}
+      />
 
       {error && (
         <div className="alert justify-center alert-error shadow-lg rounded-md mx-4">
@@ -76,7 +83,9 @@ const Dashboard: React.FC = () => {
         <>
           <StatsOverview overview={data.overview ?? []} />
           <StatsChart chartData={data.chartData ?? []} period={period} />
-          <PaymentStats payments={data.payments ?? { CASH: 0, OM: 0, MOMO: 0 }} />
+          <PaymentStats
+            payments={data.payments ?? { CASH: 0, OM: 0, MOMO: 0 }}
+          />
           <SalesMix
             topServices={data.topServices ?? []}
             topProducts={data.topProducts ?? []}

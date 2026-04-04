@@ -33,3 +33,13 @@ axiosInstance.interceptors.response.use(
     return Promise.reject(error);
   },
 );
+
+// POST /api/auth/google
+// baseURL is already ".../api" so the path must be "/auth/google" — not "/api/auth/google"
+export async function googleAuth(idToken: string, businessName?: string) {
+  const res = await axiosInstance.post("/auth/google", {
+    idToken,
+    ...(businessName ? { businessName } : {}),
+  });
+  return res.data;
+}

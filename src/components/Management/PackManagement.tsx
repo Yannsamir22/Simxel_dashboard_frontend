@@ -1,7 +1,6 @@
 import { Check, Edit2, Plus, Trash2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useT } from "../../hooks/useT";
-import PackageSkeleton from "./skeleton/PackageSkeleton";
 import { usePackageStore, type Package } from "../../stores/packageStore";
 import { useServiceStore } from "../../stores/serviceStore";
 import { useToastStore } from "../../stores/toastStore";
@@ -9,6 +8,7 @@ import ManagementModal, {
   PACKAGE_FIELDS,
   type ModalMode,
 } from "./ManagementModal";
+import PackageSkeleton from "./skeleton/PackageSkeleton";
 
 const PackManagement: React.FC = () => {
   const { t } = useT();
@@ -71,7 +71,7 @@ const PackManagement: React.FC = () => {
 
   const handleDelete = async () => {
     const result = await removePackage(target!.id);
-    if (result.success) addToast("Package deleted", "success");
+    if (result.success) addToast(t("packages.deleted"), "success");
     return result;
   };
 
@@ -79,10 +79,8 @@ const PackManagement: React.FC = () => {
 
   return (
     <div className="space-y-6 px-4 sm:px-6 lg:px-8 py-6 max-w-7xl mx-auto animate-in fade-in duration-500">
-
       {/* Header */}
       <div className="bg-base-200 p-4 sm:p-6 rounded-xl border border-base-300 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 shadow-lg">
-
         <div>
           <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-primary">
             {t("packages.title")}
@@ -117,7 +115,6 @@ const PackManagement: React.FC = () => {
             key={pkg.id}
             className="bg-base-200 border border-base-300 rounded-xl overflow-hidden hover:border-primary/50 transition-all group shadow-sm"
           >
-
             {/* Card header */}
             <div className="p-5 border-b border-base-300 flex justify-between items-start bg-base-300/30">
               <h4 className="font-black uppercase text-sm tracking-tight">
@@ -173,7 +170,6 @@ const PackManagement: React.FC = () => {
                 <Trash2 size={14} />
               </button>
             </div>
-
           </div>
         ))}
       </div>
@@ -191,7 +187,6 @@ const PackManagement: React.FC = () => {
         onEdit={handleEdit}
         onDelete={handleDelete}
       />
-
     </div>
   );
 };

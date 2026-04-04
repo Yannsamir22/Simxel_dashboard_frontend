@@ -1,13 +1,12 @@
 import { Edit2, Plus, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useT } from "../../hooks/useT";
-import Loading from "../../loadash/Loading";
 import { useServiceStore, type Service } from "../../stores/serviceStore";
+import { useToastStore } from "../../stores/toastStore";
 import ManagementModal, {
   SERVICE_FIELDS,
   type ModalMode,
 } from "./ManagementModal";
-import { useToastStore } from "../../stores/toastStore";
 import ServiceSkeleton from "./skeleton/ServiceSkeleton";
 
 const ServiceManagement = () => {
@@ -54,12 +53,12 @@ const ServiceManagement = () => {
   };
   const handleEdit = async (data: any) => {
     const result = await editService(target!.id, data);
-    if (result.success) addToast(t("common.save") ,"success");
+    if (result.success) addToast(t("common.save"), "success");
     return result;
   };
   const handleDelete = async () => {
     const result = await removeService(target!.id);
-    if (result.success) addToast("Service deleted", "success");
+    if (result.success) addToast(t("services.deleted"), "success");
     return result;
   };
 
@@ -150,7 +149,9 @@ const ServiceManagement = () => {
         entityName="Service"
         accentColor="primary"
         initial={target ?? undefined}
-        onCreate={handleCreate} onEdit={handleEdit} onDelete={handleDelete}
+        onCreate={handleCreate}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
       />
     </div>
   );

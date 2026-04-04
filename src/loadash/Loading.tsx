@@ -6,7 +6,7 @@ interface LoadingProps {
 
 const Loading: React.FC<LoadingProps> = ({ message }) => {
   return (
-    <div className="h-full w-full flex flex-col items-center justify-center bg-base-100">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-base-100">
       <span className="loading loading-bars loading-lg text-primary"></span>
       <p className="font-black uppercase tracking-[0.4em] text-[10px] opacity-50">
         {message}

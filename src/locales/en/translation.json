@@ -13,7 +13,24 @@
     "noData": "No data",
     "error": "An error occurred",
     "success": "Done",
-    "actions": "Actions"
+    "failed": "Failed.",
+    "actions": "Actions",
+    "name": "Name",
+    "price": "Price",
+    "currency": "FCFA",
+    "deleteConfirmTitle": "Delete this item?",
+    "deleteConfirmDesc": "Will be permanently removed.",
+    "deleteError": "Failed to delete",
+    "deleteSuccess": "Deleted successfully",
+    "validation": {
+      "selectAtLeastOne": "Select at least one option.",
+      "fieldRequired": "{{field}} is required.",
+      "mustBeNumber": "Must be a number.",
+      "minValue": "Minimum is {{min}}.",
+      "maxValue": "Maximum is {{max}}.",
+      "invalidAmount": "Please enter a valid amount.",
+      "selectType": "Please select an expense type."
+    }
   },
 
   "languages": {
@@ -30,7 +47,14 @@
     "logout": "Sign out",
     "noAccount": "Don't have an account?",
     "alreadyHaveAccount": "Already have an account?",
-    "register": "Create account"
+    "register": "Create account",
+    "loginFailed": "Login failed.",
+    "googleLoginFailed": "Google login failed. Please try again.",
+    "googleAuthFailed": "Google authentication failed. Please try again.",
+    "somethingWentWrong": "Something went wrong.",
+    "emailPlaceholder": "owner@example.com",
+    "passwordPlaceholder": "••••••••",
+    "or": "OR"
   },
 
   "register": {
@@ -52,6 +76,9 @@
     "welcome": "Signed in as",
     "selectPrompt": "Select a business to manage",
     "notActivated": "Not activated",
+    "notActivatedDesc": "POS Not Activated Yet",
+    "notActivatedMsg": "Enter your Simxel License Key in the POS client to activate your business. Once activated, you can log in here.",
+    "noBusinesses": "No businesses found.",
     "addNew": "Add a new business",
     "switchBusiness": "Switch business"
   },
@@ -125,7 +152,13 @@
     "prestations": "Prestations",
     "generated": "Revenue generated",
     "commission": "Commission",
-    "noData": "No data for this period. Click Generate."
+    "noData": "No data for this period. Click Generate.",
+    "exportFailed": "Export failed.",
+    "failedToLoadSummary": "Failed to load summary.",
+    "failedToLoadItems": "Failed to load top items.",
+    "failedToLoadStaff": "Failed to load staff data.",
+    "failedToLoadBalance": "Failed to load balance.",
+    "failedToLoadStock": "Failed to load stock status."
   },
 
   "management": {
@@ -143,7 +176,8 @@
     "commission": "Commission",
     "role": "Role",
     "dob": "Date of Birth",
-    "noEmployees": "No employees yet"
+    "noEmployees": "No employees yet",
+    "deleted": "Employee deleted successfully"
   },
 
   "products": {
@@ -158,7 +192,8 @@
     "outOfStock": "Out of stock",
     "lowStock": "Low stock",
     "inStock": "in stock",
-    "noProducts": "No products yet"
+    "noProducts": "No products yet",
+    "deleted": "Product deleted"
   },
 
   "services": {
@@ -168,7 +203,12 @@
     "name": "Service Name",
     "price": "Price",
     "noServices": "No services yet",
-    "noServicesAvailable": "No services available"
+    "noServicesAvailable": "No services available",
+    "deleted": "Service deleted successfully",
+    "failedToFetch": "Failed to fetch services",
+    "failedToCreate": "Failed to create service",
+    "failedToUpdate": "Failed to update service",
+    "failedToDelete": "Failed to delete service"
   },
 
   "packages": {
@@ -177,7 +217,8 @@
     "addPackage": "Add Package",
     "included": "Included Services",
     "noServices": "No linked services",
-    "noPackages": "No packages yet"
+    "noPackages": "No packages yet",
+    "deleted": "Package deleted"
   },
 
   "expenses": {
@@ -188,9 +229,13 @@
     "thisMonth": "This Month",
     "noExpenses": "No expenses recorded",
     "type": "Expense Type",
+    "typeHint": "Select a type…",
+    "description": "Add a description…",
+    "amount": "e.g. 5000",
     "deleted": "Expense deleted",
     "updated": "Expense updated",
     "added": "Expense added",
+    "failedToSave": "Failed to save expense.",
     "types": {
       "Rent": "Rent",
       "Electricity": "Electricity",
@@ -221,11 +266,19 @@
     "fullResetNote": "Use this if the POS operator has lost all access. Both passwords will be replaced on next sync.",
     "resetAll": "Reset both passwords",
     "passwordUpdated": "Password updated. The POS will apply it on next sync.",
+    "passwordFailed": "Failed to update password.",
     "ownerAccount": "Owner account",
     "changeOwnerPassword": "Change dashboard password",
     "currentPassword": "Current password",
     "newPassword": "New password",
+    "confirmPassword": "Confirm password",
     "switchBusiness": "Switch business",
+    "successMessage": "Done.",
+    "failureMessage": "Failed.",
+    "errorMessage": "Something went wrong.",
+    "passwordPlaceholder": "••••••••",
+    "currencyEUR": "EUR",
+    "currencyFCFA": "FCFA",
     "themes": {
       "system": "System",
       "light": "Light",

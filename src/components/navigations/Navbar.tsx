@@ -2,9 +2,10 @@
 import { ChevronRight, LogOut, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useT } from "../../hooks/useT";
+import { useTheme } from "../../hooks/useTheme";
 import { useAuthStore } from "../../stores/authStore";
 import { useBusinessStore } from "../../stores/businessStore";
-import { useT } from "../../hooks/useT";
 import ToggleLanguage from "../toggles/ToggleLanguage";
 import ToggleTheme from "../toggles/ToggleTheme";
 // @ts-ignore
@@ -12,29 +13,14 @@ import logoLight from "../../assets/simxel_light.svg";
 // @ts-ignore
 import logoDark from "../../assets/simxel_dark.svg";
 
-function useIsDark(): boolean {
-  const [isDark, setIsDark] = useState(
-    () => document.documentElement.getAttribute("data-theme") === "simxel-dark"
-  );
-  useEffect(() => {
-    const observer = new MutationObserver(() => {
-      setIsDark(
-        document.documentElement.getAttribute("data-theme") === "simxel-dark"
-      );
-    });
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["data-theme"],
-    });
-    return () => observer.disconnect();
-  }, []);
-  return isDark;
-}
-
 const Navbar: React.FC = () => {
   const { t } = useT();
   const navigate = useNavigate();
-  const isDark = useIsDark();
+  const { theme } = useTheme();
+  const isDark =
+    theme === "dark" ||
+    (theme === "system" &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches);
   const logo = isDark ? logoDark : logoLight;
 
   const [isOpen, setIsOpen] = useState(false);
@@ -54,16 +40,20 @@ const Navbar: React.FC = () => {
 
   return (
     <header className="fixed w-full top-0 z-40 backdrop-blur-lg bg-base-100/80 border-b border-base-200">
-      <div className="container mx-auto h-16 w-full flex items-center justify-between px-4">
-
+      <div className="container mx-auto h-16 w-full flex items-center justify-between px-2">
         {/* Logo + business name */}
         <div className="flex items-center gap-3">
-          <figure className="w-30 flex items-center">
-            <img src={logo} alt="Simxel" className="h-7 object-contain" />
+          <figure className="w-12 flex items-center">
+            <img src={"./logo.png"} alt="Simxel" className="object-contain" />
           </figure>
+          <span className="text-sm px-2 tracking-tighter uppercase font-bold text-primary">
+            Simxel
+          </span>
           {selectedBusiness && (
             <>
-              <span className="opacity-20 text-lg font-thin hidden sm:block">/</span>
+              <span className="opacity-20 text-lg font-thin hidden sm:block">
+                /
+              </span>
               <span className="hidden sm:block text-xs font-black uppercase tracking-widest opacity-60 truncate max-w-[140px]">
                 {selectedBusiness.name}
               </span>
@@ -76,7 +66,7 @@ const Navbar: React.FC = () => {
           {owner && (
             <div className="flex items-center gap-2 text-sm opacity-60 mr-1">
               <div className="avatar placeholder">
-                <div className="bg-primary text-primary-content rounded-full w-7">
+                <div className="bg-primary text-primary-content rounded-full w-7 items-center flex justify-center">
                   <span className="text-xs font-black">
                     {(owner.name ?? owner.email)[0].toUpperCase()}
                   </span>
@@ -155,7 +145,10 @@ const Navbar: React.FC = () => {
                     {selectedBusiness.name}
                   </span>
                   <button
-                    onClick={() => { setIsOpen(false); navigate("/select-business"); }}
+                    onClick={() => {
+                      setIsOpen(false);
+                      navigate("/select-business");
+                    }}
                     className="text-xs text-primary font-bold"
                   >
                     {t("settings.switchBusiness")}

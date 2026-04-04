@@ -1,54 +1,16 @@
 import { Monitor, Moon, Sun } from "lucide-react";
-import { useEffect, useState } from "react";
 import { useT } from "../../hooks/useT";
-
-// Map user-facing theme names -> actual DaisyUI theme attribute values
-type ThemeChoice = "light" | "dark" | "system";
-
-function resolveAndApply(choice: ThemeChoice) {
-  let resolved: "simxel" | "simxel-dark";
-
-  if (choice === "system") {
-    resolved = window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "simxel-dark"
-      : "simxel";
-  } else {
-    resolved = choice === "dark" ? "simxel-dark" : "simxel";
-  }
-
-  document.documentElement.setAttribute("data-theme", resolved);
-  localStorage.setItem("theme", choice); // store user's choice, not resolved value
-}
+import { useTheme } from "../../hooks/useTheme";
 
 const ToggleTheme = () => {
   const { t } = useT();
-  const THEMES: { label: string; value: ThemeChoice; icon: any }[] = [
-  { label: t("settings.themes.system"), value: "system", icon: Monitor },
-  { label: t("settings.themes.light"),  value: "light",  icon: Sun },
-  { label: t("settings.themes.dark"),   value: "dark",   icon: Moon },
-];
+  const { theme, setTheme } = useTheme();
 
-  const [theme, setTheme] = useState<ThemeChoice>(() => {
-    return (localStorage.getItem("theme") as ThemeChoice) || "system";
-  });
-
-  useEffect(() => {
-    resolveAndApply(theme);
-
-    // React to OS preference changes when in system mode
-    if (theme === "system") {
-      const mq = window.matchMedia("(prefers-color-scheme: dark)");
-      const handler = () => resolveAndApply("system");
-      mq.addEventListener("change", handler);
-      return () => mq.removeEventListener("change", handler);
-    }
-  }, [theme]);
-
-  const handleChange = (value: ThemeChoice) => {
-    setTheme(value);
-    resolveAndApply(value);
-    localStorage.setItem("theme", value);
-  };
+  const THEMES = [
+    { label: t("settings.themes.system"), value: "system" as const, icon: Monitor },
+    { label: t("settings.themes.light"), value: "light" as const, icon: Sun },
+    { label: t("settings.themes.dark"), value: "dark" as const, icon: Moon },
+  ];
 
   return (
     <div className="dropdown dropdown-end">
@@ -72,7 +34,7 @@ const ToggleTheme = () => {
         {THEMES.map(({ label, value, icon: Icon }) => (
           <li key={value}>
             <button
-              onClick={() => handleChange(value)}
+              onClick={() => setTheme(value)}
               className={`flex items-center gap-2 rounded-md ${
                 theme === value ? "font-bold text-primary" : ""
               }`}

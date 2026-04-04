@@ -1,5 +1,5 @@
-// src/components/Sales.tsx
 import {
+  ArrowRightCircle,
   CalendarDays,
   ChevronDown,
   ChevronLeftCircle,
@@ -277,7 +277,8 @@ const Sales: React.FC = () => {
               setPage(0);
             }}
           />
-          <span className="opacity-40 text-sm">→</span>
+          <span className="opacity-40 text-sm"><ArrowRightCircle />
+          </span>
           <input
             type="date"
             className="input input-bordered input-sm"

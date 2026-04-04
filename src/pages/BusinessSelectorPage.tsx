@@ -1,11 +1,11 @@
 // src/pages/BusinessSelectorPage.tsx
 import { Building2, CheckCircle2, ChevronRight, LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useAuthStore } from "../stores/authStore";
-import { useBusinessStore } from "../stores/businessStore";
-import { useT } from "../hooks/useT";
 import simxelDark from "../assets/simxel_dark.svg";
 import simxelLight from "../assets/simxel_light.svg";
+import { useT } from "../hooks/useT";
+import { useAuthStore } from "../stores/authStore";
+import { useBusinessStore } from "../stores/businessStore";
 
 const BusinessSelectorPage = () => {
   const { t } = useT();
@@ -59,7 +59,7 @@ const BusinessSelectorPage = () => {
           <div className="space-y-3">
             {businesses.length === 0 ? (
               <div className="text-center py-10 opacity-50">
-                <p className="text-sm">No businesses found.</p>
+                <p className="text-sm">{t("business.noBusinesses")}</p>
               </div>
             ) : (
               businesses.map((business) => {
@@ -73,16 +73,19 @@ const BusinessSelectorPage = () => {
                     disabled={isDisabled}
                     className={`
                       w-full flex items-center gap-4 p-4 rounded-xl border transition-all text-left
-                      ${isDisabled
-                        ? "opacity-40 cursor-not-allowed border-base-300 bg-base-200"
-                        : isSelected
-                          ? "border-primary bg-primary/5 shadow-sm"
-                          : "border-base-300 bg-base-200 hover:border-primary/50 hover:bg-base-300/50"
+                      ${
+                        isDisabled
+                          ? "opacity-40 cursor-not-allowed border-base-300 bg-base-200"
+                          : isSelected
+                            ? "border-primary bg-primary/5 shadow-sm"
+                            : "border-base-300 bg-base-200 hover:border-primary/50 hover:bg-base-300/50"
                       }
                     `}
                   >
                     {/* Icon */}
-                    <div className={`p-2.5 rounded-lg ${isSelected ? "bg-primary text-primary-content" : "bg-base-300"}`}>
+                    <div
+                      className={`p-2.5 rounded-lg ${isSelected ? "bg-primary text-primary-content" : "bg-base-300"}`}
+                    >
                       <Building2 size={20} />
                     </div>
 
@@ -115,10 +118,11 @@ const BusinessSelectorPage = () => {
           {/* M1 — Pending activation notice: shown when all businesses are not activated */}
           {businesses.length > 0 && businesses.every((b) => !b.isActivated) && (
             <div className="mt-6 p-4 rounded-xl border border-warning/30 bg-warning/5 text-center">
-              <p className="text-sm font-bold opacity-70 mb-1">POS Not Activated Yet</p>
+              <p className="text-sm font-bold opacity-70 mb-1">
+                {t("business.notActivatedDesc")}
+              </p>
               <p className="text-xs opacity-50 leading-relaxed">
-                Enter your Simxel License Key in the POS client to activate your business.
-                Once activated, you can log in here.
+                {t("business.notActivatedMsg")}
               </p>
             </div>
           )}

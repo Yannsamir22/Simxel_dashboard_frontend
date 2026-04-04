@@ -1,13 +1,12 @@
-import { Edit2, Plus, Trash2, UserCog, Briefcase } from "lucide-react";
+import { Edit2, Plus, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useT } from "../../hooks/useT";
-import { useToastStore } from "../../stores/toastStore";
 import { type Employee, useEmployeeStore } from "../../stores/employeeStore";
+import { useToastStore } from "../../stores/toastStore";
 import ManagementModal, {
   EMPLOYEE_FIELDS,
   type ModalMode,
 } from "./ManagementModal";
-import Loading from "../../loadash/Loading";
 import EmployeeSkeleton from "./skeleton/EmployeeSkeleton";
 
 const EmployeeManagement = () => {
@@ -43,7 +42,7 @@ const EmployeeManagement = () => {
     setModalOpen(true);
   };
 
-   const handleCreate = async (data: any) => {
+  const handleCreate = async (data: any) => {
     const result = await addEmployee(data);
     if (result.success) addToast(t("employees.addEmployee") + " success");
     return result;
@@ -55,7 +54,7 @@ const EmployeeManagement = () => {
   };
   const handleDelete = async () => {
     const result = await removeEmployee(target!.id);
-    if (result.success) addToast("Employee deleted successfully");
+    if (result.success) addToast(t("employees.deleted"), "success");
     return result;
   };
 
@@ -64,10 +63,7 @@ const EmployeeManagement = () => {
     setMode("delete");
     setModalOpen(true);
   };
-  if (loading)
-    return (
-     <EmployeeSkeleton/>
-    );
+  if (loading) return <EmployeeSkeleton />;
 
   return (
     <div className="pb-24 md:pd-6 space-y-6 animate-in fade-in duration-300 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -140,7 +136,9 @@ const EmployeeManagement = () => {
                     </td>
                     <td className="text-right pr-6 space-x-2">
                       {emp.commissionRate ? (
-                        <span className={`font-mono font-bold text-green-500 ${(emp.commissionRate ?? 0) > 0 ? "text-success" : "text-error"}`}>
+                        <span
+                          className={`font-mono font-bold text-green-500 ${(emp.commissionRate ?? 0) > 0 ? "text-success" : "text-error"}`}
+                        >
                           {Math.round((emp.commissionRate ?? 0) * 100)}%
                         </span>
                       ) : (

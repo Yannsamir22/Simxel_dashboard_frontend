@@ -1,21 +1,27 @@
-// src/pages/LoginPage.tsx
+import { GoogleLogin } from "@react-oauth/google";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthService } from "../services/authService";
-import { useAuthStore } from "../stores/authStore";
-import { useBusinessStore } from "../stores/businessStore";
+import { googleAuth } from "../api/api";
 import simxelDark from "../assets/simxel_dark.svg";
 import simxelLight from "../assets/simxel_light.svg";
-import ToggleTheme from "../components/toggles/ToggleTheme";
 import ToggleLanguage from "../components/toggles/ToggleLanguage";
+import ToggleTheme from "../components/toggles/ToggleTheme";
 import { useT } from "../hooks/useT";
+import { useTheme } from "../hooks/useTheme";
+import { AuthService } from "../services/authService";
+import type { Business } from "../stores/authStore";
+import { useAuthStore } from "../stores/authStore";
+import { useBusinessStore } from "../stores/businessStore";
 
 const LoginPage = () => {
   const { t } = useT();
   const navigate = useNavigate();
+  const { theme } = useTheme();
+  const isDark = theme === "dark" || (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+  const logo = isDark ? simxelDark : simxelLight;
+
   const setAuth = useAuthStore((s) => s.setAuth);
-  // ✅ select the ACTION (function), not the state (object)
   const selectBusiness = useBusinessStore((s) => s.selectBusiness);
 
   const [email, setEmail] = useState("");
@@ -24,6 +30,27 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Shared post-auth navigation — same logic for both email and Google
+  const handleAuthSuccess = (res: {
+    token: string;
+    owner: any;
+    businesses: Business[];
+  }) => {
+    setAuth(res.token, res.owner, res.businesses);
+
+    const activated = res.businesses.filter((b) => b.isActivated);
+
+    if (activated.length === 0) {
+      navigate("/select-business");
+    } else if (activated.length === 1) {
+      selectBusiness(activated[0]);
+      navigate("/dashboard");
+    } else {
+      navigate("/select-business");
+    }
+  };
+
+  //  Email / password login
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email.trim() || !password) return;
@@ -35,31 +62,34 @@ const LoginPage = () => {
       const res = await AuthService.login(email.trim(), password);
 
       if (!res.ok) {
-        setError(res.error ?? "Login failed.");
+        setError(res.error ?? t("auth.loginFailed"));
         return;
       }
 
-      setAuth(res.token, res.owner, res.businesses);
-
-      const activated = res.businesses.filter(
-        (b: { isActivated: boolean }) => b.isActivated
-      );
-
-      if (activated.length === 0) {
-        // M2: No activated businesses — navigate to selector which shows the activation notice
-        navigate("/select-business");
-      } else if (activated.length === 1) {
-        // Only one activated business — skip selector
-        selectBusiness(activated[0]);
-        navigate("/dashboard");
-      } else {
-        // Multiple activated businesses — let user pick
-        navigate("/select-business");
-      }
+      handleAuthSuccess(res);
     } catch (err: any) {
-      setError(err.response?.data?.error ?? "Something went wrong.");
+      setError(err.response?.data?.error ?? t("auth.somethingWentWrong"));
     } finally {
       setLoading(false);
+    }
+  };
+
+  //  Google login
+  const handleGoogleSuccess = async (credentialResponse: {
+    credential?: string;
+  }) => {
+    setError(null);
+    try {
+      const res = await googleAuth(credentialResponse.credential ?? "");
+
+      if (!res.ok) {
+        setError(res.error ?? t("auth.googleLoginFailed"));
+        return;
+      }
+
+      handleAuthSuccess(res);
+    } catch {
+      setError(t("auth.googleAuthFailed"));
     }
   };
 
@@ -76,8 +106,11 @@ const LoginPage = () => {
         <div className="w-full max-w-sm">
           {/* Logo */}
           <div className="flex justify-center mb-8">
-            <img src={simxelLight} alt="Simxel" className="h-10 block dark:hidden" />
-            <img src={simxelDark}  alt="Simxel" className="h-10 hidden dark:block" />
+            <img
+              src={"./logo.png"}
+              alt="Simxel"
+              className="w-20 h-20"
+            />
           </div>
 
           {/* Heading */}
@@ -85,19 +118,17 @@ const LoginPage = () => {
             <h1 className="text-2xl font-black tracking-tight">
               {t("auth.welcomeBack")}
             </h1>
-            <p className="text-sm opacity-50 mt-1">
-              {t("auth.loginSubtitle")}
-            </p>
+            <p className="text-sm opacity-50 mt-1">{t("auth.loginSubtitle")}</p>
           </div>
 
-          {/* Error */}
+          {/* Error banner */}
           {error && (
             <div className="alert alert-error mb-4 text-sm py-2">
               <span>{error}</span>
             </div>
           )}
 
-          {/* Form */}
+          {/* Email / password form */}
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="form-control">
               <label className="label pb-1">
@@ -108,7 +139,7 @@ const LoginPage = () => {
               <input
                 type="email"
                 className="input input-bordered w-full"
-                placeholder="owner@example.com"
+                placeholder={t("auth.emailPlaceholder")}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 autoComplete="email"
@@ -126,7 +157,7 @@ const LoginPage = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   className="input input-bordered w-full pr-10"
-                  placeholder="••••••••"
+                  placeholder={t("auth.passwordPlaceholder")}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   autoComplete="current-password"
@@ -155,6 +186,22 @@ const LoginPage = () => {
               )}
             </button>
           </form>
+
+          {/* OR divider — inside the card, below submit */}
+          <div className="divider text-xs opacity-50 my-4">{t("auth.or")}</div>
+
+          {/* Google button — full width, inside the card */}
+          <div className="flex justify-center">
+            <GoogleLogin
+              onSuccess={handleGoogleSuccess}
+              onError={() => setError(t("auth.googleLoginFailed"))}
+              width="368"
+              text="signin_with"
+              shape="rectangular"
+              logo_alignment="center"
+              theme="filled_blue"
+            />
+          </div>
         </div>
       </div>
 

@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import BottomNavbar from "./components/navigations/BottomNavbar";
 import Navbar from "./components/navigations/Navbar";
@@ -67,37 +68,39 @@ function App() {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* Public */}
-        <Route path="/login" element={<LoginPage />} />
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+      <BrowserRouter>
+        <Routes>
+          {/* Public */}
+          <Route path="/login" element={<LoginPage />} />
 
-        {/* Auth required, but no business selection needed yet — M5 fix */}
-        <Route
-          path="/select-business"
-          element={
-            <AuthOnlyRoute>
-              <BusinessSelectorPage />
-            </AuthOnlyRoute>
-          }
-        />
+          {/* Auth required, but no business selection needed yet — M5 fix */}
+          <Route
+            path="/select-business"
+            element={
+              <AuthOnlyRoute>
+                <BusinessSelectorPage />
+              </AuthOnlyRoute>
+            }
+          />
 
-        {/* Fully protected — needs auth + selected business */}
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <AppShell />
-            </ProtectedRoute>
-          }
-        />
+          {/* Fully protected — needs auth + selected business */}
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <AppShell />
+              </ProtectedRoute>
+            }
+          />
 
-        {/* Catch-all → dashboard (ProtectedRoute will redirect to login if needed) */}
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
-        <Route path="*" element={<Navigate to="/dashboard" replace />} />
-      </Routes>
-    </BrowserRouter>
+          {/* Catch-all → dashboard (ProtectedRoute will redirect to login if needed) */}
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route path="*" element={<Navigate to="/dashboard" replace />} />
+        </Routes>
+      </BrowserRouter>
+    </GoogleOAuthProvider>
   );
 }
 
-export default App;
+export default App;

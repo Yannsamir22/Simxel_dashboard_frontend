@@ -1,6 +1,6 @@
-// src/components/Report.tsx
 import {
   AlertTriangle,
+  ArrowRightCircle,
   BarChart2,
   CalendarDays,
   Download,
@@ -19,7 +19,7 @@ const fmt = (n: number) => n.toLocaleString("fr-FR") + " FCFA";
 const fmtPct = (a: number, total: number) =>
   total > 0 ? `${Math.round((a / total) * 100)}%` : "—";
 
-// ── Stat card ───────────────────────────────────────────────────────────────
+//  Stat card 
 const StatCard = ({
   icon,
   label,
@@ -45,7 +45,7 @@ const StatCard = ({
   </div>
 );
 
-// ── Section wrapper with optional export button ─────────────────────────────
+//  Section wrapper with optional export button 
 const Section = ({
   icon,
   title,
@@ -90,8 +90,9 @@ const Section = ({
   </div>
 );
 
-// ── Export hook — handles loading + error per section ───────────────────────
+//  Export hook — handles loading + error per section 
 function useExport(fn: () => Promise<void>) {
+  const { t } = useT();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -101,7 +102,7 @@ function useExport(fn: () => Promise<void>) {
     try {
       await fn();
     } catch (e: any) {
-      setError(e.message ?? "Export failed.");
+      setError(e.message ?? t("reports.exportFailed"));
     } finally {
       setLoading(false);
     }
@@ -110,7 +111,7 @@ function useExport(fn: () => Promise<void>) {
   return { loading, error, run };
 }
 
-// ── Main component ──────────────────────────────────────────────────────────
+//  Main component 
 const Report: React.FC = () => {
   const { t } = useT();
   const selectedBusiness = useBusinessStore((s) => s.selectedBusiness);
@@ -124,7 +125,7 @@ const Report: React.FC = () => {
   const [start, setStart] = useState(firstOfMonth);
   const [end, setEnd] = useState(today);
 
-  // ── Summary ──
+  //  Summary 
   const [summary, setSummary] = useState<any>(null);
   const [summLoading, setSummLoading] = useState(false);
   const [summError, setSummError] = useState<string | null>(null);
@@ -136,15 +137,15 @@ const Report: React.FC = () => {
     try {
       const res = await ReportService.getSalesSummary(start, end);
       setSummary(res.ok ? res.data : null);
-      if (!res.ok) setSummError(res.error ?? t("common.error"));
+      if (!res.ok) setSummError(res.error ?? t("reports.failedToLoadSummary"));
     } catch (e: any) {
-      setSummError(e.response?.data?.error ?? t("common.error"));
+      setSummError(e.response?.data?.error ?? t("reports.failedToLoadSummary"));
     } finally {
       setSummLoading(false);
     }
   };
 
-  // ── Top items ──
+  //  Top items 
   const [topItems, setTopItems] = useState<any[]>([]);
   const [topLoading, setTopLoading] = useState(false);
   const [topError, setTopError] = useState<string | null>(null);
@@ -156,15 +157,15 @@ const Report: React.FC = () => {
     try {
       const res = await ReportService.getTopItems(start, end, 10);
       setTopItems(res.ok ? (res.data ?? []) : []);
-      if (!res.ok) setTopError(res.error ?? t("common.error"));
+      if (!res.ok) setTopError(res.error ?? t("reports.failedToLoadItems"));
     } catch (e: any) {
-      setTopError(e.response?.data?.error ?? t("common.error"));
+      setTopError(e.response?.data?.error ?? t("reports.failedToLoadItems"));
     } finally {
       setTopLoading(false);
     }
   };
 
-  // ── Staff ──
+  //  Staff 
   const [staff, setStaff] = useState<any[]>([]);
   const [staffLoading, setStaffLoading] = useState(false);
   const [staffError, setStaffError] = useState<string | null>(null);
@@ -176,15 +177,15 @@ const Report: React.FC = () => {
     try {
       const res = await ReportService.getStaffPerformance(start, end);
       setStaff(res.ok ? (res.data ?? []) : []);
-      if (!res.ok) setStaffError(res.error ?? t("common.error"));
+      if (!res.ok) setStaffError(res.error ?? t("reports.failedToLoadStaff"));
     } catch (e: any) {
-      setStaffError(e.response?.data?.error ?? t("common.error"));
+      setStaffError(e.response?.data?.error ?? t("reports.failedToLoadStaff"));
     } finally {
       setStaffLoading(false);
     }
   };
 
-  // ── Financial balance ──
+  //  Financial balance 
   const [balance, setBalance] = useState<any>(null);
   const [balLoading, setBalLoading] = useState(false);
   const [balError, setBalError] = useState<string | null>(null);
@@ -196,15 +197,15 @@ const Report: React.FC = () => {
     try {
       const res = await ReportService.getFinancialBalance(start, end);
       setBalance(res.ok ? res.data : null);
-      if (!res.ok) setBalError(res.error ?? t("common.error"));
+      if (!res.ok) setBalError(res.error ?? t("reports.failedToLoadBalance"));
     } catch (e: any) {
-      setBalError(e.response?.data?.error ?? t("common.error"));
+      setBalError(e.response?.data?.error ?? t("reports.failedToLoadBalance"));
     } finally {
       setBalLoading(false);
     }
   };
 
-  // ── Stock status ──
+  //  Stock status 
   const [stock, setStock] = useState<any[]>([]);
   const [stockLoading, setStockLoading] = useState(false);
   const [stockError, setStockError] = useState<string | null>(null);
@@ -215,9 +216,9 @@ const Report: React.FC = () => {
     try {
       const res = await ReportService.getStockStatus();
       setStock(res.ok ? (res.data ?? []) : []);
-      if (!res.ok) setStockError(res.error ?? t("common.error"));
+      if (!res.ok) setStockError(res.error ?? t("reports.failedToLoadStock"));
     } catch (e: any) {
-      setStockError(e.response?.data?.error ?? t("common.error"));
+      setStockError(e.response?.data?.error ?? t("reports.failedToLoadStock"));
     } finally {
       setStockLoading(false);
     }
@@ -236,7 +237,7 @@ const Report: React.FC = () => {
     loadAll();
   });
 
-  // ── Excel export hooks ──
+  //  Excel export hooks 
   const journalExport = useExport(() =>
     ReportService.exportSalesJournal(start, end, bizName),
   );
@@ -257,7 +258,7 @@ const Report: React.FC = () => {
 
   return (
     <div className="space-y-6 px-4 sm:px-6 lg:px-8 py-6 max-w-7xl mx-auto pb-24">
-      {/* ── Header ─────────────────────────────────────────────────────────── */}
+      {/*  Header  */}
       <div className="bg-base-200 border border-base-300 rounded-xl p-5">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="border-l-4 border-primary pl-4">
@@ -279,7 +280,7 @@ const Report: React.FC = () => {
                 value={start}
                 onChange={(e) => setStart(e.target.value)}
               />
-              <span className="opacity-40 text-sm">→</span>
+              <span className="opacity-40 text-sm"><ArrowRightCircle /></span>
               <input
                 type="date"
                 className="input input-bordered input-sm"
@@ -294,7 +295,7 @@ const Report: React.FC = () => {
         </div>
       </div>
 
-      {/* ── Sales Summary ───────────────────────────────────────────────────── */}
+      {/*  Sales Summary  */}
       <Section
         icon={<TrendingUp size={16} />}
         title={t("reports.summary")}
@@ -364,7 +365,7 @@ const Report: React.FC = () => {
         )}
       </Section>
 
-      {/* ── Financial Balance ───────────────────────────────────────────────── */}
+      {/*  Financial Balance  */}
       <Section
         icon={<Wallet size={16} />}
         title={t("reports.financialBalance")}
@@ -453,7 +454,7 @@ const Report: React.FC = () => {
         )}
       </Section>
 
-      {/* ── Top Items ───────────────────────────────────────────────────────── */}
+      {/*  Top Items  */}
       <Section icon={<Package size={16} />} title={t("reports.topItems")}>
         {topLoading ? (
           <div className="flex justify-center py-8">
@@ -502,7 +503,7 @@ const Report: React.FC = () => {
         )}
       </Section>
 
-      {/* ── Staff Performance ───────────────────────────────────────────────── */}
+      {/*  Staff Performance  */}
       <Section
         icon={<Users size={16} />}
         title={t("reports.staffPerformance")}
@@ -563,7 +564,7 @@ const Report: React.FC = () => {
         )}
       </Section>
 
-      {/* ── Stock Status ────────────────────────────────────────────────────── */}
+      {/*  Stock Status  */}
       <Section
         icon={<AlertTriangle size={16} />}
         title={t("reports.stockStatus")}

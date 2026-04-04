@@ -1,7 +1,6 @@
 import { Edit2, Plus, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useT } from "../../hooks/useT";
-import Loading from "../../loadash/Loading";
 import { useProductStore, type Product } from "../../stores/productStore";
 import { useToastStore } from "../../stores/toastStore";
 import ManagementModal, {
@@ -61,10 +60,10 @@ const ProductManagement = () => {
   };
   const handleDelete = async () => {
     const result = await removeProduct(target!.id);
-    if (result.success) addToast("Product deleted", "success");
+    if (result.success) addToast(t("products.deleted"), "success");
     return result;
   };
-  if (loading) return <ProductSkeleton/>;
+  if (loading) return <ProductSkeleton />;
 
   return (
     <div className="space-y-6">
