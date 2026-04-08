@@ -148,7 +148,7 @@ const Settings = () => {
       .then((res) => {
         if (res.ok) setPosConfig(res.data);
       })
-      .catch(() => {});
+      .catch(() => { });
   }, []);
 
   const [mgr, setMgr] = useState({ current: "", next: "" });
@@ -271,7 +271,7 @@ const Settings = () => {
             <span className="opacity-50">{t("settings.posStatus")}:</span>
             {posConfig.exists ? (
               <span
-                className={`badge badge-sm ${posConfig.isSynced ? "badge-success" : "badge-warning"}`}
+                className={`badge badge-sm px-4 ${posConfig.isSynced ? "badge-success" : "badge-warning"}`}
               >
                 {posConfig.isSynced
                   ? t("settings.synced")
@@ -433,8 +433,8 @@ const Settings = () => {
       <Section icon={<User size={16} />} title={t("settings.ownerAccount")}>
         <div className="flex items-center gap-3 py-1">
           <div className="avatar placeholder">
-            <div className="bg-primary text-primary-content rounded-full w-10">
-              <span className="text-sm font-black">
+            <div className="bg-primary text-primary-content rounded-full w-10 flex items-center justify-center">
+              <span className="text-md font-black">
                 {(owner?.name ?? owner?.email ?? "?")[0].toUpperCase()}
               </span>
             </div>

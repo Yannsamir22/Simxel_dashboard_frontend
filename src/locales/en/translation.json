@@ -153,7 +153,16 @@
     "generated": "Revenue generated",
     "commission": "Commission",
     "noData": "No data for this period. Click Generate.",
+    "exportJournal": "Sales Journal",
+    "exportExcel": "Excel",
     "exportFailed": "Export failed.",
+    "stockStatus": "Stock status",
+    "product": "Product",
+    "currentStock": "Current stock",
+    "minAlert": "Min. alert",
+    "status": "Status",
+    "alert": "Alert",
+    "ok": "OK",
     "failedToLoadSummary": "Failed to load summary.",
     "failedToLoadItems": "Failed to load top items.",
     "failedToLoadStaff": "Failed to load staff data.",
@@ -351,5 +360,22 @@
     "printSuccess": "Receipt sent to printer",
     "printError": "Print failed",
     "openError": "Could not open file"
+  },
+
+  "notification": {
+    "title": "Notifications",
+    "noNotifications": "No notifications",
+    "allCaughtUp": "You're all caught up!",
+    "loading": "Loading...",
+    "markAllAsRead": "Mark all as read",
+    "clearRead": "Clear read",
+    "unread": "Unread",
+    "read": "Read",
+    "justNow": "Just now",
+    "minutesAgo": "{{count}}m ago",
+    "hoursAgo": "{{count}}h ago",
+    "daysAgo": "{{count}}d ago",
+    "monthsAgo": "{{count}}mo ago",
+    "yearsAgo": "{{count}}y ago"
   }
 }

@@ -3,6 +3,7 @@ import {
   ArrowRightCircle,
   BarChart2,
   CalendarDays,
+  Check,
   Download,
   Loader2,
   Package,
@@ -371,7 +372,7 @@ const Report: React.FC = () => {
         title={t("reports.financialBalance")}
         onExport={balanceExport.run}
         exporting={balanceExport.loading}
-        exportLabel="Excel"
+        exportLabel={t("reports.exportExcel")}
       >
         {balanceExport.error && (
           <p className="text-error text-xs mb-2">{balanceExport.error}</p>
@@ -509,7 +510,7 @@ const Report: React.FC = () => {
         title={t("reports.staffPerformance")}
         onExport={staffExport.run}
         exporting={staffExport.loading}
-        exportLabel="Excel"
+        exportLabel={t("reports.exportExcel")}
       >
         {staffExport.error && (
           <p className="text-error text-xs mb-2">{staffExport.error}</p>
@@ -570,7 +571,7 @@ const Report: React.FC = () => {
         title={t("reports.stockStatus")}
         onExport={stockExport.run}
         exporting={stockExport.loading}
-        exportLabel="Excel"
+        exportLabel={t("reports.exportExcel")}
       >
         {stockExport.error && (
           <p className="text-error text-xs mb-2">{stockExport.error}</p>
@@ -614,11 +615,11 @@ const Report: React.FC = () => {
                     <td className="text-center">
                       {p.status === "ALERT" ? (
                         <span className="badge badge-error badge-sm">
-                          ⚠ {t("reports.alert")}
+                          <AlertTriangle size={12} /> {t("reports.alert")}
                         </span>
                       ) : (
-                        <span className="badge badge-success badge-sm">
-                          ✓ OK
+                        <span className="badge badge-success badge-sm px-4">
+                          <Check size={12} /> {t("reports.ok")}
                         </span>
                       )}
                     </td>

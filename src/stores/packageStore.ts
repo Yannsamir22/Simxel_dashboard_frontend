@@ -1,6 +1,5 @@
 import { create } from "zustand";
-import {PackageService
-} from "../services/packageService";
+import { PackageService } from "../services/packageService";
 
 export interface PackageItems {
   serviceId: string;
@@ -28,12 +27,12 @@ type PackageState = {
   }) => Promise<{ success: boolean; error?: string }>;
   editPackage: (
     id: string,
-    data: { name?: string; price?: number; serviceIds?: string[] }
+    data: { name?: string; price?: number; serviceIds?: string[] },
   ) => Promise<{ success: boolean; error?: string }>;
   removePackage: (id: string) => Promise<{ success: boolean; error?: string }>;
 };
 
-// Normalize backend package shape → flat services array for the UI
+// Normalize backend package shape -> flat services array for the UI
 function normalize(pkg: any): Package {
   return {
     id: pkg.id,
@@ -85,7 +84,7 @@ export const usePackageStore = create<PackageState>((set) => ({
       const res = await PackageService.updatePackage(id, data);
       const raw = res.package ?? res.data ?? res;
       set((state) => ({
-        packages: state.packages.map((p) => p.id === id ? normalize(raw) : p),
+        packages: state.packages.map((p) => (p.id === id ? normalize(raw) : p)),
       }));
       return { success: true };
     } catch (error: any) {

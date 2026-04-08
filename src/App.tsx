@@ -1,19 +1,18 @@
-
-import { useState, useEffect } from "react";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import { useEffect, useState } from "react";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
+import Dashboard from "./components/Management/Dashboard";
 import BottomNavbar from "./components/navigations/BottomNavbar";
 import Navbar from "./components/navigations/Navbar";
-import Dashboard from "./components/Management/Dashboard";
 import New from "./components/New";
 import Report from "./components/Report";
 import Sales from "./components/Sales";
 import Settings from "./components/Settings";
-import LoginPage from "./pages/LoginPage";
 import BusinessSelectorPage from "./pages/BusinessSelectorPage";
-import { useAuthStore } from "./stores/authStore";
+import LoginPage from "./pages/LoginPage";
 import { AuthService } from "./services/authService";
+import { useAuthStore } from "./stores/authStore";
 
 export type TabKey = "Dashboard" | "Sales" | "New" | "Report" | "Settings";
 
@@ -31,21 +30,25 @@ const AppShell = () => {
 
   const renderContent = () => {
     switch (activeTab) {
-      case "Dashboard": return <Dashboard />;
-      case "Sales":     return <Sales />;
-      case "New":       return <New />;
-      case "Report":    return <Report />;
-      case "Settings":  return <Settings />;
-      default:          return <Dashboard />;
+      case "Dashboard":
+        return <Dashboard />;
+      case "Sales":
+        return <Sales />;
+      case "New":
+        return <New />;
+      case "Report":
+        return <Report />;
+      case "Settings":
+        return <Settings />;
+      default:
+        return <Dashboard />;
     }
   };
 
   return (
     <div className="min-h-screen bg-base-100 font-sans text-base-content">
       <Navbar />
-      <div className="mt-16 pb-20">
-        {renderContent()}
-      </div>
+      <div className="mt-16 pb-20">{renderContent()}</div>
       <BottomNavbar
         activeTab={activeTab}
         setActiveTab={(tab) => setActiveTab(tab as TabKey)}
@@ -94,7 +97,7 @@ function App() {
             }
           />
 
-          {/* Catch-all → dashboard (ProtectedRoute will redirect to login if needed) */}
+          {/* Catch-all -> dashboard (ProtectedRoute will redirect to login if needed) */}
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
           <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>

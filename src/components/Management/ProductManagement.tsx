@@ -66,7 +66,7 @@ const ProductManagement = () => {
   if (loading) return <ProductSkeleton />;
 
   return (
-    <div className="space-y-6">
+    <div className="px-4 pb-24 md:pd-6 space-y-6 animate-in fade-in duration-300 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="bg-base-200 rounded-md shadow-xl border border-base-300 overflow-hidden animate-in fade-in duration-500">
         <div className="p-6 border-b border-base-300 flex justify-between items-center relative">
           <div className="absolute left-4 top-8 bottom-8 w-px bg-primary" />
@@ -80,7 +80,7 @@ const ProductManagement = () => {
           </div>
           <button
             onClick={openCreate}
-            className="btn btn-primary btn-sm rounded-sm font-bold gap-2 uppercase text-[10px] tracking-widest shadow-lg shadow-primary/20"
+            className="btn btn-primary btn-sm rounded-sm font-bold uppercase text-[10px] tracking-widest"
           >
             <Plus size={16} /> {t("products.addProduct")}
           </button>
@@ -117,13 +117,12 @@ const ProductManagement = () => {
                   <td className="text-center">
                     <span
                       className={`font-black px-2 py-1 rounded-sm text-sm
-                          ${
-                            prod.stock <= 0
-                              ? "bg-error/20 text-error"
-                              : prod.stock <= (prod.minStockAlert ?? 5)
-                                ? "bg-warning/20 text-warning"
-                                : "text-secondary"
-                          }`}
+                          ${prod.stock <= 0
+                          ? "bg-error/20 text-error"
+                          : prod.stock <= (prod.minStockAlert ?? 5)
+                            ? "bg-warning/20 text-warning"
+                            : "text-secondary"
+                        }`}
                     >
                       {prod.stock}
                     </span>

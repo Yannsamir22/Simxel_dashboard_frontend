@@ -1,4 +1,3 @@
-
 import {
   CircleDollarSign,
   LayoutDashboard,
@@ -17,13 +16,13 @@ interface SidebarProps {
 const BottomNavbar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
   const { t } = useT();
 
-  // Keys match src/locales/*/translation.json → "navbar.*"
+  // Keys match src/locales/*/translation.json -> "navbar.*"
   const menu = [
     { key: "Dashboard", label: t("navbar.dashboard"), icon: LayoutDashboard },
-    { key: "Sales",     label: t("navbar.sales"),     icon: CircleDollarSign },
-    { key: "New",       label: t("navbar.new"),        icon: PlusSquare, isCentered: true },
-    { key: "Report",    label: t("navbar.report"),     icon: Sheet },
-    { key: "Settings",  label: t("navbar.settings"),   icon: Settings },
+    { key: "Sales", label: t("navbar.sales"), icon: CircleDollarSign },
+    { key: "New", label: t("navbar.new"), icon: PlusSquare, isCentered: true },
+    { key: "Report", label: t("navbar.report"), icon: Sheet },
+    { key: "Settings", label: t("navbar.settings"), icon: Settings },
   ];
 
   return (

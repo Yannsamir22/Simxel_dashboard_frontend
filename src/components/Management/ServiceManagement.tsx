@@ -65,7 +65,7 @@ const ServiceManagement = () => {
   if (loading) return <ServiceSkeleton />;
 
   return (
-    <div className="space-y-6">
+    <div className="px-4 pb-24 md:pd-6 space-y-6 animate-in fade-in duration-300 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="bg-base-200 rounded-md shadow-xl border border-base-300 overflow-hidden animate-in fade-in duration-500">
         <div className="p-6 border-b border-base-300 flex justify-between items-center relative">
           <div className="absolute left-4 top-8 bottom-8 w-px bg-primary" />

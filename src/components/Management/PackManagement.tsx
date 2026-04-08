@@ -80,7 +80,7 @@ const PackManagement: React.FC = () => {
   return (
     <div className="space-y-6 px-4 sm:px-6 lg:px-8 py-6 max-w-7xl mx-auto animate-in fade-in duration-500">
       {/* Header */}
-      <div className="bg-base-200 p-4 sm:p-6 rounded-xl border border-base-300 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 shadow-lg">
+      <div className="p-6 border-b border-base-300 flex justify-between items-center relative">
         <div>
           <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-primary">
             {t("packages.title")}
@@ -93,7 +93,7 @@ const PackManagement: React.FC = () => {
 
         <button
           onClick={openCreate}
-          className="btn btn-primary btn-sm sm:btn-md w-full sm:w-auto rounded-lg font-bold gap-2 uppercase text-[10px] tracking-widest shadow-lg shadow-primary/20"
+          className="btn btn-primary btn-sm rounded-sm font-bold uppercase text-[10px] tracking-widest"
         >
           <Plus size={16} /> {t("packages.addPackage")}
         </button>

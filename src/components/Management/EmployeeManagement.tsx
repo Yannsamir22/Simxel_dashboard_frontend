@@ -66,7 +66,7 @@ const EmployeeManagement = () => {
   if (loading) return <EmployeeSkeleton />;
 
   return (
-    <div className="pb-24 md:pd-6 space-y-6 animate-in fade-in duration-300 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="px-4 pb-24 md:pd-6 space-y-6 animate-in fade-in duration-300 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       {/* Header */}
       <div className="bg-base-200 rounded-md shadow-xl border border-base-300 overflow-hidden relative">
         <div className="p-6 border-b border-base-300 flex justify-between items-center relative">
@@ -75,7 +75,7 @@ const EmployeeManagement = () => {
             <h3 className="text-xl font-black uppercase tracking-tighter">
               {t("employees.title")}
             </h3>
-            <p className="text-[10px] font-bold text-base-content/50 uppercase tracking-[0.3em">
+            <p className="text-[10px] font-bold text-base-content/50 uppercase tracking-[0.3em]">
               {t("employees.subtitle")}
             </p>
           </div>

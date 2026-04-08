@@ -153,7 +153,16 @@
     "generated": "Revenus générés",
     "commission": "Commission",
     "noData": "Aucune donnée pour cette période. Cliquez sur Générer.",
+    "exportJournal": "Journal des ventes",
+    "exportExcel": "Excel",
     "exportFailed": "Exportation échouée.",
+    "stockStatus": "État du stock",
+    "product": "Produit",
+    "currentStock": "Stock actuel",
+    "minAlert": "Alerte min.",
+    "status": "Statut",
+    "alert": "Alerte",
+    "ok": "OK",
     "failedToLoadSummary": "Impossible de charger le résumé.",
     "failedToLoadItems": "Impossible de charger les articles.",
     "failedToLoadStaff": "Impossible de charger les données du personnel.",
@@ -351,5 +360,22 @@
     "printSuccess": "Reçu envoyé à l'imprimante",
     "printError": "Échec de l'impression",
     "openError": "Impossible d'ouvrir le fichier"
+  },
+
+  "notification": {
+    "title": "Notifications",
+    "noNotifications": "Aucune notification",
+    "allCaughtUp": "Vous êtes à jour !",
+    "loading": "Chargement...",
+    "markAllAsRead": "Marquer tout comme lu",
+    "clearRead": "Effacer les lus",
+    "unread": "Non lues",
+    "read": "Lues",
+    "justNow": "À l'instant",
+    "minutesAgo": "il y a {{count}}m",
+    "hoursAgo": "il y a {{count}}h",
+    "daysAgo": "il y a {{count}}j",
+    "monthsAgo": "il y a {{count}} mois",
+    "yearsAgo": "il y a {{count}} ans"
   }
 }

@@ -244,7 +244,7 @@ function buildPayload(
       if (!isNaN(n)) payload[f.key] = n;
     } else if (f.type === "percent") {
       const n = parseFloat(String(val));
-      if (!isNaN(n)) payload[f.key] = n / 100; // 10 → 0.1
+      if (!isNaN(n)) payload[f.key] = n / 100; // 10 -> 0.1
     } else if (String(val).trim() !== "") {
       payload[f.key] = String(val).trim();
     }
@@ -262,42 +262,44 @@ const DeleteConfirm: React.FC<{
 }> = ({ name, onConfirm, onCancel, loading }) => {
   const { t } = useT();
   return (
-  <div className="p-6 flex flex-col items-center gap-4 text-center">
-    <div className="p-4 rounded-full bg-error/10 text-error">
-      <AlertTriangle size={28} />
+    <div className="p-6 flex flex-col items-center gap-4 text-center">
+      <div className="p-4 rounded-full bg-error/10 text-error">
+        <AlertTriangle size={28} />
+      </div>
+      <div>
+        <p className="font-black text-base uppercase tracking-tight">
+          {t("common.deleteConfirmTitle")}
+        </p>
+        <p className="text-sm text-base-content/60 mt-1">
+          <span className="font-bold text-base-content">{name}</span>{" "}
+          {t("common.deleteConfirmDesc")}
+        </p>
+      </div>
+      <div className="flex gap-3 w-full">
+        <button
+          onClick={onCancel}
+          disabled={loading}
+          className="btn btn-ghost flex-1 rounded-lg font-bold"
+        >
+          {t("common.cancel")}
+        </button>
+        <button
+          onClick={onConfirm}
+          disabled={loading}
+          className="btn btn-error flex-1 rounded-lg font-bold"
+        >
+          {loading ? (
+            <span className="loading loading-spinner loading-xs" />
+          ) : (
+            <>
+              <Trash2 size={15} /> {t("common.delete")}
+            </>
+          )}
+        </button>
+      </div>
     </div>
-    <div>
-      <p className="font-black text-base uppercase tracking-tight">
-        {t("common.deleteConfirmTitle")}
-      </p>
-      <p className="text-sm text-base-content/60 mt-1">
-        <span className="font-bold text-base-content">{name}</span> {t("common.deleteConfirmDesc")}
-      </p>
-    </div>
-    <div className="flex gap-3 w-full">
-      <button
-        onClick={onCancel}
-        disabled={loading}
-        className="btn btn-ghost flex-1 rounded-lg font-bold"
-      >
-        {t("common.cancel")}
-      </button>
-      <button
-        onClick={onConfirm}
-        disabled={loading}
-        className="btn btn-error flex-1 rounded-lg font-bold"
-      >
-        {loading ? (
-          <span className="loading loading-spinner loading-xs" />
-        ) : (
-          <>
-            <Trash2 size={15} /> {t("common.delete")}
-          </>
-        )}
-      </button>
-    </div>
-  </div>
-);};
+  );
+};
 
 // Main component
 
