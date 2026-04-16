@@ -1,3 +1,4 @@
+// src/components/Report.tsx
 import {
   AlertTriangle,
   ArrowRightCircle,
@@ -20,7 +21,7 @@ const fmt = (n: number) => n.toLocaleString("fr-FR") + " FCFA";
 const fmtPct = (a: number, total: number) =>
   total > 0 ? `${Math.round((a / total) * 100)}%` : "—";
 
-//  Stat card 
+// ── Stat card ───────────────────────────────────────────────────────────────
 const StatCard = ({
   icon,
   label,
@@ -46,7 +47,7 @@ const StatCard = ({
   </div>
 );
 
-//  Section wrapper with optional export button 
+// ── Section wrapper with optional export button ─────────────────────────────
 const Section = ({
   icon,
   title,
@@ -91,7 +92,7 @@ const Section = ({
   </div>
 );
 
-//  Export hook — handles loading + error per section 
+// ── Export hook — handles loading + error per section ───────────────────────
 function useExport(fn: () => Promise<void>) {
   const { t } = useT();
   const [loading, setLoading] = useState(false);
@@ -112,7 +113,7 @@ function useExport(fn: () => Promise<void>) {
   return { loading, error, run };
 }
 
-//  Main component 
+// ── Main component ──────────────────────────────────────────────────────────
 const Report: React.FC = () => {
   const { t } = useT();
   const selectedBusiness = useBusinessStore((s) => s.selectedBusiness);
@@ -126,7 +127,7 @@ const Report: React.FC = () => {
   const [start, setStart] = useState(firstOfMonth);
   const [end, setEnd] = useState(today);
 
-  //  Summary 
+  // ── Summary ──
   const [summary, setSummary] = useState<any>(null);
   const [summLoading, setSummLoading] = useState(false);
   const [summError, setSummError] = useState<string | null>(null);
@@ -146,7 +147,7 @@ const Report: React.FC = () => {
     }
   };
 
-  //  Top items 
+  // ── Top items ──
   const [topItems, setTopItems] = useState<any[]>([]);
   const [topLoading, setTopLoading] = useState(false);
   const [topError, setTopError] = useState<string | null>(null);
@@ -166,7 +167,7 @@ const Report: React.FC = () => {
     }
   };
 
-  //  Staff 
+  // ── Staff ──
   const [staff, setStaff] = useState<any[]>([]);
   const [staffLoading, setStaffLoading] = useState(false);
   const [staffError, setStaffError] = useState<string | null>(null);
@@ -186,7 +187,7 @@ const Report: React.FC = () => {
     }
   };
 
-  //  Financial balance 
+  // ── Financial balance ──
   const [balance, setBalance] = useState<any>(null);
   const [balLoading, setBalLoading] = useState(false);
   const [balError, setBalError] = useState<string | null>(null);
@@ -206,7 +207,7 @@ const Report: React.FC = () => {
     }
   };
 
-  //  Stock status 
+  // ── Stock status ──
   const [stock, setStock] = useState<any[]>([]);
   const [stockLoading, setStockLoading] = useState(false);
   const [stockError, setStockError] = useState<string | null>(null);
@@ -238,7 +239,7 @@ const Report: React.FC = () => {
     loadAll();
   });
 
-  //  Excel export hooks 
+  // ── Excel export hooks ──
   const journalExport = useExport(() =>
     ReportService.exportSalesJournal(start, end, bizName),
   );
@@ -259,7 +260,7 @@ const Report: React.FC = () => {
 
   return (
     <div className="space-y-6 px-4 sm:px-6 lg:px-8 py-6 max-w-7xl mx-auto pb-24">
-      {/*  Header  */}
+      {/* ── Header ─────────────────────────────────────────────────────────── */}
       <div className="bg-base-200 border border-base-300 rounded-xl p-5">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="border-l-4 border-primary pl-4">
@@ -281,7 +282,9 @@ const Report: React.FC = () => {
                 value={start}
                 onChange={(e) => setStart(e.target.value)}
               />
-              <span className="opacity-40 text-sm"><ArrowRightCircle /></span>
+              <span className="opacity-40 text-sm">
+                <ArrowRightCircle />
+              </span>
               <input
                 type="date"
                 className="input input-bordered input-sm"
@@ -296,7 +299,7 @@ const Report: React.FC = () => {
         </div>
       </div>
 
-      {/*  Sales Summary  */}
+      {/* ── Sales Summary ───────────────────────────────────────────────────── */}
       <Section
         icon={<TrendingUp size={16} />}
         title={t("reports.summary")}
@@ -366,13 +369,13 @@ const Report: React.FC = () => {
         )}
       </Section>
 
-      {/*  Financial Balance  */}
+      {/* ── Financial Balance ───────────────────────────────────────────────── */}
       <Section
         icon={<Wallet size={16} />}
         title={t("reports.financialBalance")}
         onExport={balanceExport.run}
         exporting={balanceExport.loading}
-        exportLabel={t("reports.exportExcel")}
+        exportLabel="Excel"
       >
         {balanceExport.error && (
           <p className="text-error text-xs mb-2">{balanceExport.error}</p>
@@ -455,7 +458,7 @@ const Report: React.FC = () => {
         )}
       </Section>
 
-      {/*  Top Items  */}
+      {/* ── Top Items ───────────────────────────────────────────────────────── */}
       <Section icon={<Package size={16} />} title={t("reports.topItems")}>
         {topLoading ? (
           <div className="flex justify-center py-8">
@@ -504,13 +507,13 @@ const Report: React.FC = () => {
         )}
       </Section>
 
-      {/*  Staff Performance  */}
+      {/* ── Staff Performance ───────────────────────────────────────────────── */}
       <Section
         icon={<Users size={16} />}
         title={t("reports.staffPerformance")}
         onExport={staffExport.run}
         exporting={staffExport.loading}
-        exportLabel={t("reports.exportExcel")}
+        exportLabel="Excel"
       >
         {staffExport.error && (
           <p className="text-error text-xs mb-2">{staffExport.error}</p>
@@ -565,13 +568,13 @@ const Report: React.FC = () => {
         )}
       </Section>
 
-      {/*  Stock Status  */}
+      {/* ── Stock Status ────────────────────────────────────────────────────── */}
       <Section
         icon={<AlertTriangle size={16} />}
         title={t("reports.stockStatus")}
         onExport={stockExport.run}
         exporting={stockExport.loading}
-        exportLabel={t("reports.exportExcel")}
+        exportLabel="Excel"
       >
         {stockExport.error && (
           <p className="text-error text-xs mb-2">{stockExport.error}</p>
@@ -614,12 +617,13 @@ const Report: React.FC = () => {
                     </td>
                     <td className="text-center">
                       {p.status === "ALERT" ? (
-                        <span className="badge badge-error badge-sm">
-                          <AlertTriangle size={12} /> {t("reports.alert")}
+                        <span className="badge badge-error badge-sm p-2">
+                          <AlertTriangle size={10} /> {t("reports.alert")}
                         </span>
                       ) : (
-                        <span className="badge badge-success badge-sm px-4">
-                          <Check size={12} /> {t("reports.ok")}
+                        <span className="badge badge-success badge-sm p-2">
+                          <Check size={10} />
+                          OK
                         </span>
                       )}
                     </td>

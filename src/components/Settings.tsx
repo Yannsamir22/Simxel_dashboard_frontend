@@ -148,7 +148,7 @@ const Settings = () => {
       .then((res) => {
         if (res.ok) setPosConfig(res.data);
       })
-      .catch(() => { });
+      .catch(() => {});
   }, []);
 
   const [mgr, setMgr] = useState({ current: "", next: "" });

@@ -60,7 +60,7 @@ const AppShell = () => {
 function App() {
   const { isAuthenticated, logout } = useAuthStore();
 
-  // M6 — Session check: verify stored token is still valid on every app load
+  // Session check: verify stored token is still valid on every app load
   useEffect(() => {
     if (!isAuthenticated) return;
     AuthService.getMe().catch(() => {

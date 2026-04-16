@@ -1,9 +1,9 @@
-// src/pages/BusinessSelectorPage.tsx
 import { Building2, CheckCircle2, ChevronRight, LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import simxelDark from "../assets/simxel_dark.svg";
 import simxelLight from "../assets/simxel_light.svg";
 import { useT } from "../hooks/useT";
+import { useTheme } from "../hooks/useTheme";
 import { useAuthStore } from "../stores/authStore";
 import { useBusinessStore } from "../stores/businessStore";
 
@@ -12,6 +12,14 @@ const BusinessSelectorPage = () => {
   const navigate = useNavigate();
   const { owner, businesses, logout } = useAuthStore();
   const { selectBusiness, selectedBusinessId } = useBusinessStore();
+  const { theme } = useTheme();
+
+  // Logic to determine which logo to show
+  const isDark =
+    theme === "dark" ||
+    (theme === "system" &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches);
+  const logo = isDark ? simxelDark : simxelLight;
 
   const handleSelect = (business: (typeof businesses)[0]) => {
     if (!business.isActivated) return;
@@ -28,8 +36,9 @@ const BusinessSelectorPage = () => {
     <div className="min-h-screen bg-base-100 flex flex-col">
       {/* Top bar */}
       <div className="flex justify-between items-center px-6 py-4 border-b border-base-300">
-        <img src={simxelLight} alt="Simxel" className="h-7 block dark:hidden" />
-        <img src={simxelDark} alt="Simxel" className="h-7 hidden dark:block" />
+        <figure className="w-10 h-10 flex items-center justify-center">
+          <img src={logo} alt="Simxel" className="object-contain max-h-full" />
+        </figure>
         <button
           onClick={handleLogout}
           className="btn btn-ghost btn-sm gap-2 opacity-60 hover:opacity-100"

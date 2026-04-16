@@ -429,7 +429,7 @@ const ManagementModal: React.FC<ManagementModalProps> = ({
     const commonProps = { ref: index === 0 ? firstInputRef : undefined };
 
     return (
-      <div key={field.key} className="form-control">
+      <div key={field.key} className="form-control z-900">
         {/* Label */}
         <label className="label py-1">
           <span className="label-text text-[10px] font-black uppercase tracking-widest opacity-60">

@@ -1,14 +1,14 @@
 // src/components/navigations/Navbar.tsx
-import React, { useEffect, useState } from "react";
 import { ChevronRight, LogOut, Menu, X } from "lucide-react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useT } from "../../hooks/useT";
 import { useTheme } from "../../hooks/useTheme";
 import { useAuthStore } from "../../stores/authStore";
 import { useBusinessStore } from "../../stores/businessStore";
+import { SyncStatusBadge } from "../SyncStatusBadge";
 import ToggleLanguage from "../toggles/ToggleLanguage";
 import ToggleTheme from "../toggles/ToggleTheme";
-import { SyncStatusBadge } from "../SyncStatusBadge";
 
 // @ts-ignore
 import logoLight from "../../assets/simxel_light.svg";
@@ -46,7 +46,9 @@ const Navbar: React.FC = () => {
     } else {
       document.body.style.overflow = "unset";
     }
-    return () => { document.body.style.overflow = "unset"; };
+    return () => {
+      document.body.style.overflow = "unset";
+    };
   }, [isOpen]);
 
   return (
@@ -56,7 +58,11 @@ const Navbar: React.FC = () => {
           {/* Left Side: Logo + Business Name */}
           <div className="flex items-center gap-3">
             <figure className="w-10 h-10 flex items-center justify-center">
-              <img src={logo} alt="Simxel" className="object-contain max-h-full" />
+              <img
+                src={logo}
+                alt="Simxel"
+                className="object-contain max-h-full"
+              />
             </figure>
             <span className="text-sm tracking-tighter uppercase font-black text-primary hidden xs:block">
               Simxel
@@ -64,7 +70,9 @@ const Navbar: React.FC = () => {
 
             {selectedBusiness && (
               <>
-                <span className="opacity-20 text-lg font-thin hidden sm:block">/</span>
+                <span className="opacity-20 text-lg font-thin hidden sm:block">
+                  /
+                </span>
                 <span className="hidden sm:block text-xs font-black uppercase tracking-widest opacity-60 truncate max-w-[140px]">
                   {selectedBusiness.name}
                 </span>
@@ -93,11 +101,9 @@ const Navbar: React.FC = () => {
             <div className="flex items-center gap-2 border-l pl-3 border-base-300">
               <ToggleLanguage />
               <ToggleTheme />
-              {
-                selectedBusiness && (
-                  <NotificationCenter businessId={String(selectedBusiness.id)} />
-                )
-              }
+              {selectedBusiness && (
+                <NotificationCenter businessId={String(selectedBusiness.id)} />
+              )}
             </div>
 
             <button
@@ -112,11 +118,9 @@ const Navbar: React.FC = () => {
           {/* Mobile Toggle Group */}
           <div className="md:hidden flex items-center gap-1">
             <ToggleTheme />
-            {
-              selectedBusiness && (
-                <NotificationCenter businessId={String(selectedBusiness.id)} />
-              )
-            }
+            {selectedBusiness && (
+              <NotificationCenter businessId={String(selectedBusiness.id)} />
+            )}
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="p-2 text-base-content hover:bg-base-200 rounded-lg transition-colors"
@@ -130,13 +134,15 @@ const Navbar: React.FC = () => {
 
       {/* MOBILE DRAWER - Placed outside header for correct Z-indexing */}
       <div
-        className={`fixed inset-0 z-[9999] md:hidden transition-all duration-300 ${isOpen ? "visible" : "invisible"
-          }`}
+        className={`fixed inset-0 z-[9999] md:hidden transition-all duration-300 ${
+          isOpen ? "visible" : "invisible"
+        }`}
       >
         {/* Backdrop with Blur */}
         <div
-          className={`absolute inset-0 bg-black/40 backdrop-blur-md transition-opacity duration-300 ${isOpen ? "opacity-100" : "opacity-0"
-            }`}
+          className={`absolute inset-0 bg-black/40 backdrop-blur-md transition-opacity duration-300 ${
+            isOpen ? "opacity-100" : "opacity-0"
+          }`}
           onClick={() => setIsOpen(false)}
         />
 
@@ -173,7 +179,9 @@ const Navbar: React.FC = () => {
                   <p className="font-bold text-sm text-base-content truncate">
                     {owner.name ?? "—"}
                   </p>
-                  <p className="text-xs text-base-content/40 truncate">{owner.email}</p>
+                  <p className="text-xs text-base-content/40 truncate">
+                    {owner.email}
+                  </p>
                 </div>
               </div>
             )}
@@ -220,7 +228,10 @@ const Navbar: React.FC = () => {
                 <LogOut size={18} />
               </div>
               <span className="font-bold text-sm">{t("auth.logout")}</span>
-              <ChevronRight size={16} className="ml-auto opacity-20 group-hover:opacity-100 transition-opacity" />
+              <ChevronRight
+                size={16}
+                className="ml-auto opacity-20 group-hover:opacity-100 transition-opacity"
+              />
             </button>
           </div>
         </aside>

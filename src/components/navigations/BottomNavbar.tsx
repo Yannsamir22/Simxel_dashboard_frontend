@@ -16,7 +16,6 @@ interface SidebarProps {
 const BottomNavbar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
   const { t } = useT();
 
-  // Keys match src/locales/*/translation.json -> "navbar.*"
   const menu = [
     { key: "Dashboard", label: t("navbar.dashboard"), icon: LayoutDashboard },
     { key: "Sales", label: t("navbar.sales"), icon: CircleDollarSign },
@@ -26,41 +25,87 @@ const BottomNavbar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
   ];
 
   return (
-    <footer className="fixed bottom-0 left-0 w-full z-50">
+    <header>
+      {/* Conteneur principal : 
+          - Mobile : Fixé en bas, pleine largeur.
+          - PC (lg) : Fixé à gauche, vertical, flottant.
+      */}
       <nav
         className="
-          flex justify-between items-center
-          px-6 py-2
-          bg-base-100 border-t border-base-300
-          w-full rounded-none
-          sm:max-w-md sm:mx-auto
-          sm:mb-4 sm:rounded-2xl sm:border sm:shadow-lg
+          fixed z-50
+          /* Mobile Design */
+          bottom-0 left-0 w-full 
+          bg-base-100/80 backdrop-blur-xl border-t border-base-300
+          flex justify-around items-center px-2 py-3
+          
+          /* Tablet/Desktop Design (Responsive) */
+          lg:top-1/2 lg:-translate-y-1/2 lg:left-6 lg:bottom-auto
+          lg:w-20 lg:h-auto lg:flex-col lg:gap-4 lg:py-8
+          lg:rounded-3xl lg:border lg:shadow-2xl lg:bg-base-100
         "
       >
-        {menu.map(({ key, label, icon: Icon }) => {
+        {menu.map(({ key, label, icon: Icon, isCentered }) => {
           const active = activeTab === key;
+          
           return (
             <button
               key={key}
               onClick={() => setActiveTab(key)}
+              aria-current={active ? "page" : undefined}
               className={`
-                flex flex-col items-center justify-center
-                flex-1 rounded-xl
-                transition-all duration-200
-                ${active ? "scale-105 text-primary font-semibold bg-primary/5" : "hover:text-primary hover:bg-base-200"}
+                relative group flex flex-col lg:flex-row items-center justify-center
+                transition-all duration-300 ease-in-out
+                ${isCentered 
+                    ? "lg:mb-4" // Espace supplémentaire pour le bouton 'New' sur PC
+                    : "flex-1 lg:flex-none w-full"
+                }
               `}
             >
-              {key === "New" ? (
-                <Icon size={28} strokeWidth={2.5} />
-              ) : (
-                <Icon size={22} />
-              )}
-              <span className="text-xs font-semibold mt-1">{label}</span>
+              {/* Fond indicateur pour l'élément actif */}
+              <div
+                className={`
+                  absolute inset-0 transition-opacity duration-300 rounded-2xl
+                  ${active ? "bg-primary/10 opacity-100" : "opacity-0 group-hover:bg-base-200 group-hover:opacity-100"}
+                  hidden lg:block lg:mx-2
+                `}
+              />
+
+              <div className={`
+                flex flex-col items-center z-10 p-2 rounded-xl
+                transition-transform duration-200 active:scale-90
+                ${active ? "text-primary" : "text-base-content/60 group-hover:text-primary"}
+              `}>
+                
+                {/* Style spécifique pour le bouton central 'New' */}
+                <div className={`
+                    ${isCentered ? "bg-primary text-primary-content p-3 rounded-2xl shadow-lg -mt-8 lg:mt-0 lg:p-4 hover:rotate-90 transition-transform" : ""}
+                `}>
+                  <Icon 
+                    size={isCentered ? 28 : 24} 
+                    strokeWidth={active ? 2.5 : 2} 
+                  />
+                </div>
+
+                {/* Label : Masqué sur PC pour un look minimaliste, ou affiché au survol */}
+                <span className={`
+                  text-[10px] lg:text-xs font-bold mt-1 tracking-tight
+                  lg:absolute lg:left-20 lg:bg-base-800 lg:text-white lg:px-2 lg:py-1 
+                  lg:rounded lg:opacity-0 lg:group-hover:opacity-100 lg:transition-opacity lg:pointer-events-none
+                  lg:whitespace-nowrap lg:shadow-md
+                `}>
+                  {label}
+                </span>
+
+                {/* Petit point indicateur sous l'icône (Mobile seulement) */}
+                {active && !isCentered && (
+                  <span className="h-1 w-1 bg-primary rounded-full absolute bottom-0 lg:hidden" />
+                )}
+              </div>
             </button>
           );
         })}
       </nav>
-    </footer>
+    </header>
   );
 };
 
