@@ -32,12 +32,10 @@
       "selectType": "Please select an expense type."
     }
   },
-
   "languages": {
     "english": "English",
     "french": "Français"
   },
-
   "auth": {
     "welcomeBack": "Welcome back",
     "loginSubtitle": "Sign in to your Simxel dashboard",
@@ -56,7 +54,6 @@
     "passwordPlaceholder": "••••••••",
     "or": "OR"
   },
-
   "register": {
     "title": "Create your account",
     "subtitle": "Set up your owner account and first business",
@@ -71,7 +68,6 @@
     "secretKey": "POS Activation Key",
     "secretKeyNote": "Save this key — it is needed to activate the POS device."
   },
-
   "business": {
     "welcome": "Signed in as",
     "selectPrompt": "Select a business to manage",
@@ -82,7 +78,6 @@
     "addNew": "Add a new business",
     "switchBusiness": "Switch business"
   },
-
   "navbar": {
     "dashboard": "Dashboard",
     "sales": "Sales",
@@ -90,7 +85,6 @@
     "report": "Reports",
     "settings": "Settings"
   },
-
   "dashboard": {
     "title": "Dashboard",
     "subtitle": "Business Performance Overview",
@@ -116,7 +110,6 @@
       "avgCart": "Average Cart"
     }
   },
-
   "sales": {
     "title": "Sales",
     "subtitle": "Transaction history",
@@ -130,7 +123,6 @@
     "payment": "Payment",
     "amount": "Amount"
   },
-
   "reports": {
     "title": "Reports",
     "subtitle": "Analytics & exports",
@@ -169,7 +161,6 @@
     "failedToLoadBalance": "Failed to load balance.",
     "failedToLoadStock": "Failed to load stock status."
   },
-
   "management": {
     "employees": "Employees",
     "products": "Products",
@@ -177,7 +168,6 @@
     "packages": "Packages",
     "expenses": "Expenses"
   },
-
   "employees": {
     "title": "Employees",
     "subtitle": "Profile Management",
@@ -188,7 +178,6 @@
     "noEmployees": "No employees yet",
     "deleted": "Employee deleted successfully"
   },
-
   "products": {
     "title": "Stock Inventory",
     "subtitle": "Product Management",
@@ -204,7 +193,6 @@
     "noProducts": "No products yet",
     "deleted": "Product deleted"
   },
-
   "services": {
     "title": "Service Panel",
     "subtitle": "Service Management",
@@ -219,7 +207,6 @@
     "failedToUpdate": "Failed to update service",
     "failedToDelete": "Failed to delete service"
   },
-
   "packages": {
     "title": "Package & Offers",
     "subtitle": "Combined Offers Management",
@@ -229,7 +216,6 @@
     "noPackages": "No packages yet",
     "deleted": "Package deleted"
   },
-
   "expenses": {
     "title": "Expenses Journal",
     "subtitle": "Real-time Cash Outflow",
@@ -257,7 +243,6 @@
       "Other": "Other"
     }
   },
-
   "settings": {
     "title": "Settings",
     "businessInfo": "Business information",
@@ -294,7 +279,6 @@
       "dark": "Dark"
     }
   },
-
   "ticket": {
     "title": "Ticket",
     "noItems": "No items yet",
@@ -308,7 +292,6 @@
     "parkTicket": "Park ticket",
     "newTicket": "New ticket"
   },
-
   "receipt": {
     "saleConfirmed": "Sale Confirmed!",
     "receiptGenerated": "The receipt has been generated successfully.",
@@ -323,7 +306,6 @@
     "printError": "Could not print receipt",
     "openError": "Could not open receipt"
   },
-
   "sync": {
     "online": "Synced",
     "syncing": "Syncing…",
@@ -332,7 +314,6 @@
     "lastSync": "Last sync:",
     "clickToRetry": "Click to retry"
   },
-
   "pos": {
     "productSale": "Product Sale",
     "serviceSale": "Service Sale",
@@ -345,7 +326,6 @@
     "todayExpenses": "Today",
     "noProducts": "No products found"
   },
-
   "files": {
     "savedFiles": "Saved Files",
     "refresh": "Refresh",
@@ -361,7 +341,6 @@
     "printError": "Print failed",
     "openError": "Could not open file"
   },
-
   "notification": {
     "title": "Notifications",
     "noNotifications": "No notifications",
@@ -376,6 +355,72 @@
     "hoursAgo": "{{count}}h ago",
     "daysAgo": "{{count}}d ago",
     "monthsAgo": "{{count}}mo ago",
-    "yearsAgo": "{{count}}y ago"
+    "yearsAgo": "{{count}}y ago",
+    "announcements": "Announcements",
+    "subtitle": "Broadcast messages and system updates to your businesses.",
+    "empty": "No notifications yet",
+    "emptyDesc": "Announcements will appear here once broadcasted.",
+    "unreadCount": "{{count}} unread",
+    "allRead": "All notifications read",
+    "broadcastTitle": "Broadcast new announcement",
+    "broadcastDesc": "Send a system-wide message to all businesses or target a specific one.",
+    "titlePlaceholder": "Announcement title",
+    "messagePlaceholder": "Write your message here...",
+    "targetBusiness": "Target business",
+    "targetAll": "All businesses",
+    "sendToAll": "Send to all businesses",
+    "sendToSpecific": "Send to specific business",
+    "selectBusiness": "Select business...",
+    "broadcastBtn": "Broadcast Announcement",
+    "success": "Announcement broadcast successfully!",
+    "error": "Failed to broadcast announcement",
+    "type": "Type",
+    "typeInfo": "Info",
+    "typeWarning": "Warning",
+    "typeDanger": "Danger",
+    "typeSuccess": "Success",
+    "createdAt": "Created at",
+    "expiresAt": "Expires at",
+    "notExpired": "Not expired",
+    "expired": "Expired",
+    "global": "Global",
+    "specific": "Specific Business",
+    "noBusinessSelected": "No business selected"
+  },
+  "subscriptionGate": {
+    "switchBusiness": "Switch business",
+    "logout": "Sign out",
+    "title": "Subscription Expired",
+    "desc": "The Cloud dashboard access for {{name}} has expired. Please renew your subscription to continue analyzing your sales and managing your remote reports.",
+    "priceSuffix": "/ month",
+    "priceSub": "No-commitment renewal",
+    "contactBtn": "Contact Support",
+    "learnMore": "Learn More",
+    "footerNote": "Don't worry, your local POS cash register continues to function normally."
+  },
+  "pendingActivation": {
+    "switchBusiness": "Switch business",
+    "logout": "Sign out",
+    "title": "Activate your Simxel POS licence",
+    "desc": "Your business {{name}} has been successfully created. To unlock the offline local cash register app and your cloud dashboard, a lifetime license is required.",
+    "priceText": "50,000 FCFA",
+    "priceSub": "One-time lifetime payment",
+    "feature1": "Lifetime cash register software (Windows)",
+    "feature2": "Unlimited offline mode",
+    "feature3": "No hidden fees",
+    "howToActivate": "How to activate?",
+    "step1Num": "1",
+    "step1Title": "Make payment",
+    "step1Desc": "Pay via Orange Money or MTN Mobile Money to the authorized Simxel number.",
+    "step2Num": "2",
+    "step2Title": "Contact support",
+    "step2Desc": "Send the payment screenshot on WhatsApp for immediate activation.",
+    "whatsappBtn": "Send on WhatsApp",
+    "step3Num": "3",
+    "step3Title": "Sync Key",
+    "step3Desc": "Once activated, use this key to connect your physical cash register (Windows).",
+    "hideKey": "Hide key",
+    "showKey": "Show key",
+    "copy": "Copy"
   }
 }

@@ -31,9 +31,9 @@ interface Sale {
   id: string;
   totalAmount: number;
   saleDate: string;
-  user?: { name: string } | null;
-  items: SaleItem[];
-  paymentType: Payment[];
+  employee?: { name: string } | null;
+  saleItems: SaleItem[];
+  paymentTypes: Payment[];
 }
 
 const PAYMENT_COLORS: Record<string, string> = {
@@ -54,7 +54,7 @@ const SaleRow = ({
   onExpand: () => void;
   expanded: boolean;
 }) => {
-  const itemNames = sale.items
+  const itemNames = (sale.saleItems || [])
     .map((i) => i.product?.name ?? i.service?.name ?? i.package?.name ?? "?")
     .join(", ");
 
@@ -87,13 +87,13 @@ const SaleRow = ({
         {/* Items summary */}
         <td className="px-4 py-3 text-sm max-w-[180px]">
           <p className="truncate opacity-80">{itemNames || "—"}</p>
-          <p className="text-[10px] opacity-40">{sale.items.length} item(s)</p>
+          <p className="text-[10px] opacity-40">{(sale.saleItems || []).length} item(s)</p>
         </td>
 
         {/* Payments */}
         <td className="px-4 py-3 hidden sm:table-cell">
           <div className="flex flex-wrap gap-1">
-            {sale.paymentType.map((p, i) => (
+            {(sale.paymentTypes || []).map((p, i) => (
               <span
                 key={i}
                 className={`badge badge-sm p-2 font-black ${PAYMENT_COLORS[p.method] ?? "badge-ghost"}`}
@@ -129,7 +129,7 @@ const SaleRow = ({
                   Items
                 </p>
                 <div className="space-y-1">
-                  {sale.items.map((item, i) => (
+                  {(sale.saleItems || []).map((item, i) => (
                     <div key={i} className="flex justify-between text-sm">
                       <span className="opacity-70">
                         {item.product?.name ??
@@ -157,7 +157,7 @@ const SaleRow = ({
                   Payments
                 </p>
                 <div className="space-y-1">
-                  {sale.paymentType.map((p, i) => (
+                  {(sale.paymentTypes || []).map((p, i) => (
                     <div key={i} className="flex justify-between text-sm">
                       <span
                         className={`badge badge-sm font-black p-2 ${PAYMENT_COLORS[p.method] ?? "badge-ghost"}`}
@@ -219,7 +219,7 @@ const Sales: React.FC = () => {
     ? sales.filter(
         (s) =>
           s.id.toLowerCase().includes(search.toLowerCase()) ||
-          s.items.some((i) =>
+          s.saleItems.some((i) =>
             (i.product?.name ?? i.service?.name ?? i.package?.name ?? "")
               .toLowerCase()
               .includes(search.toLowerCase()),

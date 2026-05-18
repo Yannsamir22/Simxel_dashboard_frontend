@@ -1,6 +1,8 @@
 // src/components/Management/Dashboard.tsx
 import { useEffect, useState } from "react";
+import { logoDark, logoLight } from "../../assets/logo";
 import { useT } from "../../hooks/useT";
+import { useTheme } from "../../hooks/useTheme";
 import Loading from "../../loadash/Loading";
 import { SalesService } from "../../services/salesService";
 import NoSales from "./stats/NoSales";
@@ -66,7 +68,8 @@ const Dashboard: React.FC = () => {
     !loading && !error && data && (data.overview?.[0]?.value ?? 0) === 0;
 
   return (
-    <div className="space-y-5 animate-in fade-in duration-300">
+    <div className="space-y-5 animate-in fade-in duration-300 sm:px-27">
+
       <StatsHeader
         period={period}
         onPeriodChange={setPeriod}

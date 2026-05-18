@@ -1,4 +1,4 @@
-// src/services/reportService.ts
+
 import axios from "axios";
 import { axiosInstance } from "../api/api";
 import { useAuthStore } from "../stores/authStore";
@@ -6,8 +6,9 @@ import { useBusinessStore } from "../stores/businessStore";
 
 const BASE = "/businesses/:businessId/reports";
 
-// Shared Excel download helper — bypasses the shared interceptor
-// to avoid blob/arraybuffer conflicts
+const RAW_API_BASE =
+  (import.meta.env.VITE_API_URL || "http://localhost:4000") + "/api";
+
 async function downloadExcel(
   path: string,
   params: Record<string, string | undefined>,
@@ -19,11 +20,13 @@ async function downloadExcel(
   if (!businessId) throw new Error("No business selected.");
   if (!token) throw new Error("Not authenticated.");
 
-  const url = `http://localhost:4000/api/businesses/${businessId}${path}`;
+  const url = `${RAW_API_BASE}/businesses/${businessId}${path}`;
+
   const response = await axios.get(url, {
     params,
     headers: { Authorization: `Bearer ${token}` },
     responseType: "arraybuffer",
+    timeout: 30_000, // Excel exports can be slow
   });
 
   // Check if the server returned a JSON error inside the arraybuffer
@@ -48,7 +51,7 @@ async function downloadExcel(
 }
 
 export const ReportService = {
-  // ── JSON endpoints ─────────────────────────────────────────────────────
+  // ── JSON endpoints ──────────────────────────────────────────────────────
   getSalesSummary: async (startDate: string, endDate: string) => {
     const res = await axiosInstance.get(`${BASE}/summary`, {
       params: { startDate, endDate },
@@ -82,7 +85,7 @@ export const ReportService = {
     return res.data;
   },
 
-  // ── Excel exports ───────────────────────────────────────────────────────
+  // ── Excel exports ────────────────────────────────────────────────────────
   exportSalesJournal: (
     startDate: string,
     endDate: string,

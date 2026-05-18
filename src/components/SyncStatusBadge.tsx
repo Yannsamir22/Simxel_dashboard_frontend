@@ -1,64 +1,134 @@
-import { useEffect, useState } from "react";
-import { axiosInstance as api } from "../api/api";
+// src/components/SyncStatusBadge.tsx
+// Polls the server health endpoint every 30s.
+// Shows: online / syncing / unreachable / offline
+// FIX: Now exports a named export (was already correct, but added explicit type)
+// FIX: Retry logic added — clicking the badge when unreachable retries immediately
 
-type SyncData = {
-    status: "online" | "offline" | "never_synced";
-    label: string;
-    humanReadable: string | null;
-};
+import { CloudOff, Loader2, RefreshCw, Wifi } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useT } from "../hooks/useT";
+import { axiosInstance } from "../api/api";
 
-export function SyncStatusBadge({ businessId }: { businessId: string }) {
-    const [sync, setSync] = useState<SyncData | null>(null);
-    const [loading, setLoading] = useState(true);
+type SyncState = "online" | "syncing" | "unreachable" | "offline";
 
-    const fetchStatus = async () => {
-        try {
-            const res = await api.get(`/businesses/${businessId}/sync-status`);
-            setSync(res.data.data);
-        } catch {
-            setSync(null);
-        } finally {
-            setLoading(false);
+interface SyncStatusBadgeProps {
+    businessId: string;
+}
+
+async function checkServerHealth(businessId: string): Promise<boolean> {
+    try {
+        await axiosInstance.get(`/businesses/${businessId}/health`, {
+            timeout: 5000,
+        });
+        return true;
+    } catch {
+        return false;
+    }
+}
+
+export function SyncStatusBadge({ businessId }: SyncStatusBadgeProps) {
+    const { t } = useT();
+    const [status, setStatus] = useState<SyncState>("syncing");
+    const [lastSync, setLastSync] = useState<Date | null>(null);
+    const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+    const runCheck = useCallback(async () => {
+        if (!navigator.onLine) {
+            setStatus("offline");
+            return;
         }
-    };
-
-    useEffect(() => {
-        fetchStatus();
-        // Poll every 2 minutes
-        const interval = setInterval(fetchStatus, 2 * 60 * 1000);
-        return () => clearInterval(interval);
+        setStatus("syncing");
+        const ok = await checkServerHealth(businessId);
+        if (ok) {
+            setStatus("online");
+            setLastSync(new Date());
+        } else {
+            setStatus("unreachable");
+        }
     }, [businessId]);
 
-    if (loading || !sync) return null;
+    useEffect(() => {
+        runCheck();
+        intervalRef.current = setInterval(runCheck, 30_000);
+        return () => {
+            if (intervalRef.current) clearInterval(intervalRef.current);
+        };
+    }, [runCheck]);
 
-    const isOnline = sync.status === "online";
+    // Browser online/offline events
+    useEffect(() => {
+        const onOnline = () => runCheck();
+        const onOffline = () => setStatus("offline");
+        window.addEventListener("online", onOnline);
+        window.addEventListener("offline", onOffline);
+        return () => {
+            window.removeEventListener("online", onOnline);
+            window.removeEventListener("offline", onOffline);
+        };
+    }, [runCheck]);
+
+    const config: Record<
+        SyncState,
+        { label: string; color: string; icon: React.ReactNode; clickable: boolean }
+    > = {
+        online: {
+            label: t("sync.online"),
+            color: "text-success",
+            icon: <Wifi size={10} />,
+            clickable: false,
+        },
+        syncing: {
+            label: t("sync.syncing"),
+            color: "text-info",
+            icon: <Loader2 size={10} className="animate-spin" />,
+            clickable: false,
+        },
+        unreachable: {
+            label: t("sync.unreachable"),
+            color: "text-warning",
+            icon: <RefreshCw size={10} />,
+            clickable: true,
+        },
+        offline: {
+            label: t("sync.offline"),
+            color: "text-error",
+            icon: <CloudOff size={10} />,
+            clickable: false,
+        },
+    };
+
+    const { label, color, icon, clickable } = config[status];
 
     return (
-        <div
-            className={`flex items-center gap-1.5
-        px-2 py-1
-        rounded-full
-        text-[10px] sm:text-xs
-        font-semibold
-        border
-        ${isOnline
-                    ? "bg-green-500/10 border-green-500/30 text-green-400"
-                    : "bg-red-500/10 border-red-500/30 text-red-400"}
-      `}>
-            <span
-                className={`
-          w-2 h-2 rounded-full
-          ${isOnline ? "bg-green-500 animate-pulse" : "bg-red-500"}
-        `} />
-            <span className="whitespace-nowrap hidden sm:inline">
-                {sync.label}
-                {sync.humanReadable ? ` · ${sync.humanReadable}` : ""}
-            </span>
-
-            {/* Mobile short text */}
-            <span className="sm:hidden">
-                {isOnline ? "Online" : "Offline"}
-            </span>
-        </div>
+        <button
+            onClick={clickable ? runCheck : undefined}
+            disabled={!clickable}
+            title={
+                clickable
+                    ? t("sync.clickToRetry")
+                    : lastSync
+                        ? `${t("sync.lastSync")} ${lastSync.toLocaleTimeString()}`
+                        : label
+            }
+            className={`
+        hidden sm:flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest
+        px-2 py-0.5 rounded-full border
+        transition-all duration-200
+        ${color}
+        ${status === "online"
+                    ? "border-success/20 bg-success/5"
+                    : status === "syncing"
+                        ? "border-info/20 bg-info/5"
+                        : status === "unreachable"
+                            ? "border-warning/20 bg-warning/5 cursor-pointer hover:bg-warning/15"
+                            : "border-error/20 bg-error/5"
+                }
+      `}
+        >
+            {icon}
+            <span>{label}</span>
+        </button>
     );
 }
+
+export default SyncStatusBadge;

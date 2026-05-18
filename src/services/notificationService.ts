@@ -23,4 +23,8 @@ export const NotificationService = {
 
   clearRead: (businessId: string) =>
     axiosInstance.delete(`${BASE(businessId)}/clear-read`).then((r) => r.data),
+
+  getSystemNotifications: (businessId: string) => axiosInstance
+  .get(`${BASE(businessId)}/system-notifications`)
+  .then((r) => r.data)
 };

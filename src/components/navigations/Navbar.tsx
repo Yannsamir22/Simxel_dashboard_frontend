@@ -11,9 +11,9 @@ import ToggleLanguage from "../toggles/ToggleLanguage";
 import ToggleTheme from "../toggles/ToggleTheme";
 
 // @ts-ignore
-import logoLight from "../../assets/simxel_light.svg";
+import logoLight from "../../assets/logo.svg";
 // @ts-ignore
-import logoDark from "../../assets/simxel_dark.svg";
+import logoDark from "../../assets/logo.svg";
 import { NotificationCenter } from "../NotificationCenter";
 
 const Navbar: React.FC = () => {

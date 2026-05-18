@@ -1,7 +1,7 @@
 import { Building2, CheckCircle2, ChevronRight, LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import simxelDark from "../assets/simxel_dark.svg";
-import simxelLight from "../assets/simxel_light.svg";
+import simxelDark from "../assets/logo.svg";
+import simxelLight from "../assets/logo.svg";
 import { useT } from "../hooks/useT";
 import { useTheme } from "../hooks/useTheme";
 import { useAuthStore } from "../stores/authStore";
@@ -22,7 +22,6 @@ const BusinessSelectorPage = () => {
   const logo = isDark ? simxelDark : simxelLight;
 
   const handleSelect = (business: (typeof businesses)[0]) => {
-    if (!business.isActivated) return;
     selectBusiness(business);
     navigate("/dashboard");
   };
@@ -79,15 +78,12 @@ const BusinessSelectorPage = () => {
                   <button
                     key={business.id}
                     onClick={() => handleSelect(business)}
-                    disabled={isDisabled}
                     className={`
-                      w-full flex items-center gap-4 p-4 rounded-xl border transition-all text-left
+                      w-full flex items-center gap-4 p-4 rounded-xl border transition-all text-left group
                       ${
-                        isDisabled
-                          ? "opacity-40 cursor-not-allowed border-base-300 bg-base-200"
-                          : isSelected
-                            ? "border-primary bg-primary/5 shadow-sm"
-                            : "border-base-300 bg-base-200 hover:border-primary/50 hover:bg-base-300/50"
+                        isSelected
+                          ? "border-primary bg-primary/5 shadow-sm"
+                          : "border-base-300 bg-base-200 hover:border-primary/50 hover:bg-base-300/50"
                       }
                     `}
                   >

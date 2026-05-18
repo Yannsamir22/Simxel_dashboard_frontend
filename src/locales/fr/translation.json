@@ -32,12 +32,10 @@
       "selectType": "Veuillez sélectionner un type de dépense."
     }
   },
-
   "languages": {
     "english": "English",
     "french": "Français"
   },
-
   "auth": {
     "welcomeBack": "Bon retour",
     "loginSubtitle": "Connectez-vous à votre tableau de bord Simxel",
@@ -56,7 +54,6 @@
     "passwordPlaceholder": "••••••••",
     "or": "OU"
   },
-
   "register": {
     "title": "Créer votre compte",
     "subtitle": "Configurez votre compte propriétaire et votre première entreprise",
@@ -71,7 +68,6 @@
     "secretKey": "Clé d’activation POS",
     "secretKeyNote": "Conservez cette clé — elle est nécessaire pour activer le terminal POS."
   },
-
   "business": {
     "welcome": "Connecté en tant que",
     "selectPrompt": "Sélectionnez une entreprise à gérer",
@@ -82,7 +78,6 @@
     "addNew": "Ajouter une nouvelle entreprise",
     "switchBusiness": "Changer d'entreprise"
   },
-
   "navbar": {
     "dashboard": "Tableau de bord",
     "sales": "Ventes",
@@ -90,7 +85,6 @@
     "report": "Rapports",
     "settings": "Paramètres"
   },
-
   "dashboard": {
     "title": "Tableau de bord",
     "subtitle": "Aperçu des performances de l'entreprise",
@@ -116,7 +110,6 @@
       "avgCart": "Panier moyen"
     }
   },
-
   "sales": {
     "title": "Ventes",
     "subtitle": "Historique des transactions",
@@ -130,7 +123,6 @@
     "payment": "Paiement",
     "amount": "Montant"
   },
-
   "reports": {
     "title": "Rapports",
     "subtitle": "Analyses et exportations",
@@ -169,7 +161,6 @@
     "failedToLoadBalance": "Impossible de charger le bilan.",
     "failedToLoadStock": "Impossible de charger l'état du stock."
   },
-
   "management": {
     "employees": "Employés",
     "products": "Produits",
@@ -177,7 +168,6 @@
     "packages": "Forfaits",
     "expenses": "Dépenses"
   },
-
   "employees": {
     "title": "Employés",
     "subtitle": "Gestion des profils",
@@ -188,7 +178,6 @@
     "noEmployees": "Aucun employé pour le moment",
     "deleted": "Employé supprimé avec succès"
   },
-
   "products": {
     "title": "Inventaire du stock",
     "subtitle": "Gestion des produits",
@@ -204,7 +193,6 @@
     "noProducts": "Aucun produit pour le moment",
     "deleted": "Produit supprimé"
   },
-
   "services": {
     "title": "Services",
     "subtitle": "Gestion des services",
@@ -219,7 +207,6 @@
     "failedToUpdate": "Impossible de mettre à jour le service",
     "failedToDelete": "Impossible de supprimer le service"
   },
-
   "packages": {
     "title": "Forfaits & Offres",
     "subtitle": "Gestion des offres combinées",
@@ -229,7 +216,6 @@
     "noPackages": "Aucun forfait pour le moment",
     "deleted": "Forfait supprimé"
   },
-
   "expenses": {
     "title": "Journal des dépenses",
     "subtitle": "Sorties de trésorerie en temps réel",
@@ -257,7 +243,6 @@
       "Other": "Autre"
     }
   },
-
   "settings": {
     "title": "Paramètres",
     "businessInfo": "Informations de l'entreprise",
@@ -294,7 +279,6 @@
       "dark": "Sombre"
     }
   },
-
   "ticket": {
     "title": "Ticket",
     "noItems": "Aucun article",
@@ -308,7 +292,6 @@
     "parkTicket": "Mettre le ticket en attente",
     "newTicket": "Nouveau ticket"
   },
-
   "receipt": {
     "saleConfirmed": "Vente confirmée !",
     "receiptGenerated": "Le reçu a été généré avec succès.",
@@ -323,7 +306,6 @@
     "printError": "Impossible d'imprimer le reçu",
     "openError": "Impossible d'ouvrir le reçu"
   },
-
   "sync": {
     "online": "Synchronisé",
     "syncing": "Synchronisation…",
@@ -332,7 +314,6 @@
     "lastSync": "Dernière synchronisation :",
     "clickToRetry": "Cliquez pour réessayer"
   },
-
   "pos": {
     "productSale": "Vente de produit",
     "serviceSale": "Vente de service",
@@ -345,7 +326,6 @@
     "todayExpenses": "Aujourd'hui",
     "noProducts": "Aucun produit trouvé"
   },
-
   "files": {
     "savedFiles": "Fichiers enregistrés",
     "refresh": "Actualiser",
@@ -361,7 +341,6 @@
     "printError": "Échec de l'impression",
     "openError": "Impossible d'ouvrir le fichier"
   },
-
   "notification": {
     "title": "Notifications",
     "noNotifications": "Aucune notification",
@@ -376,6 +355,72 @@
     "hoursAgo": "il y a {{count}}h",
     "daysAgo": "il y a {{count}}j",
     "monthsAgo": "il y a {{count}} mois",
-    "yearsAgo": "il y a {{count}} ans"
+    "yearsAgo": "il y a {{count}} ans",
+    "announcements": "Annonces",
+    "subtitle": "Diffusez des messages et des mises à jour système à vos commerces.",
+    "empty": "Aucune notification pour le moment",
+    "emptyDesc": "Les annonces apparaîtront ici une fois diffusées.",
+    "unreadCount": "{{count}} non lues",
+    "allRead": "Toutes les notifications lues",
+    "broadcastTitle": "Diffuser une nouvelle annonce",
+    "broadcastDesc": "Diffusez un message système à tous les commerces ou à un commerce spécifique.",
+    "titlePlaceholder": "Titre de l'annonce",
+    "messagePlaceholder": "Écrivez votre message ici...",
+    "targetBusiness": "Cible commerciale",
+    "targetAll": "Tous les commerces",
+    "sendToAll": "Envoyer à tous les commerces",
+    "sendToSpecific": "Envoyer à un commerce spécifique",
+    "selectBusiness": "Selectionnez un commerce...",
+    "broadcastBtn": "Diffuser l'annonce",
+    "success": "Annonce diffusée avec succès!",
+    "error": "Échec de la diffusion de l'annonce",
+    "type": "Type",
+    "typeInfo": "Info",
+    "typeWarning": "Avertissement",
+    "typeDanger": "Danger",
+    "typeSuccess": "Succès",
+    "createdAt": "Date de création",
+    "expiresAt": "Date d'expiration",
+    "notExpired": "Non expiré",
+    "expired": "Expiré",
+    "global": "Global",
+    "specific": "Commerce spécifique",
+    "noBusinessSelected": "Aucun commerce sélectionné"
+  },
+  "subscriptionGate": {
+    "switchBusiness": "Changer de commerce",
+    "logout": "Déconnexion",
+    "title": "Abonnement Expiré",
+    "desc": "L'accès au tableau de bord Cloud pour {{name}} a expiré. Veuillez renouveler votre abonnement pour continuer à analyser vos ventes et gérer vos rapports à distance.",
+    "priceSuffix": "/ mois",
+    "priceSub": "Renouvellement sans engagement",
+    "contactBtn": "Contacter le Support",
+    "learnMore": "En savoir plus",
+    "footerNote": "Ne vous inquiétez pas, votre caisse POS locale continue de fonctionner normalement."
+  },
+  "pendingActivation": {
+    "switchBusiness": "Changer de commerce",
+    "logout": "Déconnexion",
+    "title": "Activation de votre licence Simxel POS",
+    "desc": "Votre commerce {{name}} a été créé avec succès. Pour débloquer l'application de caisse locale hors-ligne et votre tableau de bord cloud, une licence à vie est requise.",
+    "priceText": "50 000 FCFA",
+    "priceSub": "Paiement unique à vie",
+    "feature1": "Logiciel de caisse (Windows) à vie",
+    "feature2": "Mode hors-ligne illimité",
+    "feature3": "Sans frais cachés",
+    "howToActivate": "Comment activer ?",
+    "step1Num": "1",
+    "step1Title": "Effectuez le paiement",
+    "step1Desc": "Payez par Orange Money ou MTN Mobile Money au numéro autorisé de Simxel.",
+    "step2Num": "2",
+    "step2Title": "Contactez le support",
+    "step2Desc": "Envoyez la capture d'écran du paiement sur WhatsApp pour l'activation immédiate.",
+    "whatsappBtn": "Envoyer sur WhatsApp",
+    "step3Num": "3",
+    "step3Title": "Clé de synchronisation",
+    "step3Desc": "Une fois activée, utilisez cette clé pour connecter votre caisse physique (Windows).",
+    "hideKey": "Masquer la clé",
+    "showKey": "Afficher la clé",
+    "copy": "Copier"
   }
 }
