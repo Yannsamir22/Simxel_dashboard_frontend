@@ -107,7 +107,7 @@ const LoginPage = () => {
           {/* Logo */}
           <div className="flex justify-center mb-8">
             <img
-              src={"./logo.png"}
+              src={logo}
               alt="Simxel"
               className="w-20 h-20"
             />

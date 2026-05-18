@@ -1,8 +1,6 @@
 // src/components/Management/Dashboard.tsx
 import { useEffect, useState } from "react";
-import { logoDark, logoLight } from "../../assets/logo";
 import { useT } from "../../hooks/useT";
-import { useTheme } from "../../hooks/useTheme";
 import Loading from "../../loadash/Loading";
 import { SalesService } from "../../services/salesService";
 import NoSales from "./stats/NoSales";

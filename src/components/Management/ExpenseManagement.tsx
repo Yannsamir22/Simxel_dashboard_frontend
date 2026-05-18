@@ -1,7 +1,6 @@
 import { Calendar, Edit2, Plus, Receipt, Trash2 } from "lucide-react";
 import React, { useEffect, useMemo, useState } from "react";
 import { useT } from "../../hooks/useT";
-import Loading from "../../loadash/Loading";
 import type { Expense } from "../../stores/expenseStore";
 import { useExpenseStore } from "../../stores/expenseStore";
 import { useToastStore } from "../../stores/toastStore";
