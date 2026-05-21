@@ -68,7 +68,7 @@ const AppShell = () => {
         <UpdateBannerHost businessId={String(selectedBusiness.id)} />
       )}
 
-      <div className="ml-20 mt-16 pb-20">{renderContent()}</div>
+      <div className="sm:ml-20 mt-16 pb-20">{renderContent()}</div>
 
       <BottomNavbar
         activeTab={activeTab}
