@@ -38,7 +38,7 @@ function normalize(pkg: any): Package {
     id: pkg.id,
     name: pkg.name,
     price: pkg.price,
-    services: (pkg.items ?? []).map((item: any) => ({
+    services: (pkg.packageItems ?? []).map((item: any) => ({
       serviceId: item.service?.id ?? item.serviceId,
       name: item.service?.name ?? item.name ?? "Unknown",
       price: item.service?.price ?? item.price ?? 0,

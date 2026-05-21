@@ -32,7 +32,7 @@ const BottomNavbar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
       */}
       <nav
         className="
-          fixed z-50
+          fixed z-40
           /* Mobile Design */
           bottom-0 left-0 w-full 
           bg-base-100/80 backdrop-blur-xl border-t border-base-300
@@ -46,7 +46,7 @@ const BottomNavbar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
       >
         {menu.map(({ key, label, icon: Icon, isCentered }) => {
           const active = activeTab === key;
-          
+
           return (
             <button
               key={key}
@@ -55,7 +55,8 @@ const BottomNavbar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
               className={`
                 relative group flex flex-col lg:flex-row items-center justify-center
                 transition-all duration-300 ease-in-out
-                ${isCentered 
+                ${
+                  isCentered
                     ? "lg:mb-4" // Espace supplémentaire pour le bouton 'New' sur PC
                     : "flex-1 lg:flex-none w-full"
                 }
@@ -70,29 +71,34 @@ const BottomNavbar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
                 `}
               />
 
-              <div className={`
+              <div
+                className={`
                 flex flex-col items-center z-10 p-2 rounded-xl
                 transition-transform duration-200 active:scale-90
                 ${active ? "text-primary" : "text-base-content/60 group-hover:text-primary"}
-              `}>
-                
+              `}
+              >
                 {/* Style spécifique pour le bouton central 'New' */}
-                <div className={`
+                <div
+                  className={`
                     ${isCentered ? "bg-primary text-primary-content p-3 rounded-2xl shadow-lg -mt-8 lg:mt-0 lg:p-4 hover:rotate-90 transition-transform" : ""}
-                `}>
-                  <Icon 
-                    size={isCentered ? 28 : 24} 
-                    strokeWidth={active ? 2.5 : 2} 
+                `}
+                >
+                  <Icon
+                    size={isCentered ? 28 : 24}
+                    strokeWidth={active ? 2.5 : 2}
                   />
                 </div>
 
                 {/* Label : Masqué sur PC pour un look minimaliste, ou affiché au survol */}
-                <span className={`
+                <span
+                  className={`
                   text-[10px] lg:text-xs font-bold mt-1 tracking-tight
                   lg:absolute lg:left-20 lg:bg-base-800 lg:text-white lg:px-2 lg:py-1 
                   lg:rounded lg:opacity-0 lg:group-hover:opacity-100 lg:transition-opacity lg:pointer-events-none
                   lg:whitespace-nowrap lg:shadow-md
-                `}>
+                `}
+                >
                   {label}
                 </span>
 

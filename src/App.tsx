@@ -1,7 +1,3 @@
-// src/App.tsx
-// FIX: Integrated UpdateBannerHost so UPDATE_BANNER notifications display inline
-// FIX: useLogout hook used everywhere for atomic logout (clears both stores)
-// SECURITY: Session check on mount now also clears businessStore on failure
 
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { useEffect, useState } from "react";
@@ -72,7 +68,7 @@ const AppShell = () => {
         <UpdateBannerHost businessId={String(selectedBusiness.id)} />
       )}
 
-      <div className="mt-16 pb-20">{renderContent()}</div>
+      <div className="ml-20 mt-16 pb-20">{renderContent()}</div>
 
       <BottomNavbar
         activeTab={activeTab}

@@ -1,4 +1,4 @@
-// src/components/Management/Dashboard.tsx
+
 import { useEffect, useState } from "react";
 import { useT } from "../../hooks/useT";
 import Loading from "../../loadash/Loading";
@@ -66,7 +66,7 @@ const Dashboard: React.FC = () => {
     !loading && !error && data && (data.overview?.[0]?.value ?? 0) === 0;
 
   return (
-    <div className="space-y-5 animate-in fade-in duration-300 sm:px-27">
+    <div className="space-y-5 animate-in fade-in duration-300 sm:px-10 mt-20">
 
       <StatsHeader
         period={period}
@@ -81,7 +81,7 @@ const Dashboard: React.FC = () => {
       )}
 
       {data && !isEmpty && (
-        <>
+        <div className="space-y-5 animate-in fade-in duration-300">
           <StatsOverview overview={data.overview ?? []} />
           <StatsChart chartData={data.chartData ?? []} period={period} />
           <PaymentStats
@@ -98,7 +98,7 @@ const Dashboard: React.FC = () => {
             topEmployees={data.topEmployees ?? []}
             topPackages={data.topPackages ?? []}
           />
-        </>
+        </div>
       )}
 
       {isEmpty && <NoSales />}

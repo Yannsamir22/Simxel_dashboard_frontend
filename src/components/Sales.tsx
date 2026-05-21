@@ -230,7 +230,7 @@ const Sales: React.FC = () => {
   const totalPages = Math.ceil(total / LIMIT);
 
   return (
-    <div className="space-y-4 px-4 sm:px-6 lg:px-8 py-6 max-w-7xl mx-auto pb-24">
+    <div className="space-y-4 px-4 sm:px- lg:px-8 py-6 max-w-7xl mx-auto pb-24">
       {/* Header */}
       <div className="bg-base-200 rounded-xl border border-base-300 p-5">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
