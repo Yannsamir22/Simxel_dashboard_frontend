@@ -66,7 +66,7 @@ const EmployeeManagement = () => {
   if (loading) return <EmployeeSkeleton />;
 
   return (
-    <div className="pb-24 md:pd-6 space-y-6 animate-in fade-in duration-300 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="pb-36 md:pb-6 space-y-6 animate-in fade-in duration-300 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       {/* Header */}
       <div className="bg-base-200 rounded-md shadow-xl border border-base-300 overflow-hidden relative">
         <div className="p-6 border-b border-base-300 flex justify-between items-center relative">
@@ -75,7 +75,7 @@ const EmployeeManagement = () => {
             <h3 className="text-xl font-black uppercase tracking-tighter">
               {t("employees.title")}
             </h3>
-            <p className="text-[10px] font-bold text-base-content/50 uppercase tracking-[0.3em">
+            <p className="text-[10px] font-bold text-base-content/50 uppercase tracking-[0.3em]">
               {t("employees.subtitle")}
             </p>
           </div>
@@ -88,7 +88,68 @@ const EmployeeManagement = () => {
           </button>
         </div>
 
-        <div className="overflow-x-auto">
+        {/* MOBILE LIST (CARDS) */}
+        <div className="block md:hidden space-y-3 p-4">
+          {employees.length === 0 ? (
+            <p className="text-center opacity-30 text-sm font-bold py-6 uppercase tracking-wider">
+              {t("employees.noEmployees")}
+            </p>
+          ) : (
+            employees.map((emp) => (
+              <div
+                key={emp.id}
+                className="bg-base-100 border border-base-300 rounded-xl p-4 space-y-3 shadow-sm"
+              >
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h4 className="font-bold text-sm uppercase tracking-tight text-base-content">
+                      {emp.name}
+                    </h4>
+                    <p className="text-[10px] opacity-40 font-bold uppercase tracking-wider mt-1">
+                      {t("employees.dob")}:{" "}
+                      {(emp.dateOfBirth &&
+                        new Date(emp.dateOfBirth).toLocaleDateString()) ||
+                        "N/A"}
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-[9px] font-black uppercase opacity-40 tracking-wider block">
+                      {t("employees.commission")}
+                    </span>
+                    {emp.commissionRate ? (
+                      <span className="font-mono font-bold text-sm text-success">
+                        {Math.round((emp.commissionRate ?? 0) * 100)}%
+                      </span>
+                    ) : (
+                      <span className="font-mono font-bold text-sm text-error">
+                        0%
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <div className="flex justify-end gap-2 border-t border-base-300/40 pt-2">
+                  <button
+                    onClick={() => openEdit(emp)}
+                    className="btn btn-xs btn-ghost hover:text-primary transition-colors gap-1 uppercase text-[10px]"
+                  >
+                    <Edit2 size={12} /> {t("common.edit")}
+                  </button>
+
+                  <button
+                    onClick={() => openDelete(emp)}
+                    className="btn btn-xs btn-ghost text-error hover:bg-error/10 hover:text-error transition-all gap-1 uppercase text-[10px]"
+                  >
+                    <Trash2 size={12} /> {t("common.delete")}
+                  </button>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+
+        {/* DESKTOP TABLE */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="table w-full">
             <thead>
               <tr className="bg-base-300/50 border-b border-base-300">
@@ -126,7 +187,7 @@ const EmployeeManagement = () => {
                           {emp.name}
                         </span>
 
-                        <span className="text-[9px] opacity-40 font-bold u]ercase italic">
+                        <span className="text-[9px] opacity-40 font-bold uppercase italic">
                           {t("employees.dob")}:{" "}
                           {(emp.dateOfBirth &&
                             new Date(emp.dateOfBirth).toLocaleDateString()) ||

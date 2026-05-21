@@ -78,7 +78,7 @@ const PackManagement: React.FC = () => {
   if (loading) return <PackageSkeleton />;
 
   return (
-    <div className="space-y-6 px-4 sm:px-6 lg:px-8 py-6 max-w-7xl mx-auto animate-in fade-in duration-500">
+    <div className="space-y-6 px-4 sm:px-6 lg:px-8 pt-6 pb-36 md:pb-6 max-w-7xl mx-auto animate-in fade-in duration-500">
       {/* Header */}
       <div className="p-6 border-b border-base-300 flex justify-between items-center relative">
         <div>

@@ -109,11 +109,11 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
       onClick={onClose}
     >
       <div
-        className="bg-base-100 rounded-2xl shadow-2xl border border-base-300 w-full max-w-md mx-4 overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-200"
+        className="bg-base-100 rounded-2xl shadow-2xl border border-base-300 w-full max-w-md overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-200"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header — fix: hardcoded English, now uses t() */}

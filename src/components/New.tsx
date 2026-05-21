@@ -16,13 +16,13 @@ export type ManagementTab =
 const New: React.FC = () => {
   const [activeTab, setActiveTab] = useState<ManagementTab>("Employees");
   return (
-    <div className="flex min-h-screen w-full">
+    <div className="flex flex-col md:flex-row min-h-screen w-full">
       <ManagementSidebar
         activeTab={activeTab}
         setActiveTab={(tab) => setActiveTab(tab as ManagementTab)}
       />
 
-      <main className="w-full pt-2">
+      <main className="w-full pt-2 px-2 md:px-0">
         {activeTab === "Packages" && <PackManagement />}
         {activeTab === "Services" && <ServiceManagement />}
         {activeTab === "Products" && <ProductManagement />}

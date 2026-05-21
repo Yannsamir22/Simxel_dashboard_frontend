@@ -66,7 +66,7 @@ const ProductManagement = () => {
   if (loading) return <ProductSkeleton />;
 
   return (
-    <div className="px-4 pb-24 md:pd-6 space-y-6 animate-in fade-in duration-300 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="px-4 pb-36 md:pb-6 space-y-6 animate-in fade-in duration-300 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="bg-base-200 rounded-md shadow-xl border border-base-300 overflow-hidden animate-in fade-in duration-500">
         <div className="p-6 border-b border-base-300 flex justify-between items-center relative">
           <div className="absolute left-4 top-8 bottom-8 w-px bg-primary" />
@@ -86,7 +86,81 @@ const ProductManagement = () => {
           </button>
         </div>
 
-        <div className="overflow-x-auto">
+        {/* MOBILE LIST (CARDS) */}
+        <div className="block md:hidden space-y-3 p-4">
+          {products.length === 0 ? (
+            <p className="text-center opacity-30 text-sm font-bold py-6 uppercase tracking-wider">
+              {t("products.noProducts")}
+            </p>
+          ) : (
+            products.map((prod) => (
+              <div
+                key={prod.id}
+                className="bg-base-100 border border-base-300 rounded-xl p-4 space-y-3 shadow-sm"
+              >
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h4 className="font-bold text-sm uppercase tracking-tight text-base-content">
+                      {prod.name}
+                    </h4>
+                    <div className="flex gap-2 mt-1">
+                      <span className="text-[9px] opacity-40 font-bold uppercase tracking-wider">
+                        {t("products.unitCost")}:{" "}
+                        <span className="opacity-100 font-mono text-base-content/80">
+                          {prod.unitCost != null ? `${prod.unitCost.toLocaleString()} FCFA` : "—"}
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-[9px] font-black uppercase opacity-40 tracking-wider block">
+                      {t("products.salePrice")}
+                    </span>
+                    <span className="font-black text-sm text-primary italic">
+                      {prod.salePrice.toLocaleString()} FCFA
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex justify-between items-center border-t border-base-300/40 pt-2">
+                  <div className="flex items-center gap-1">
+                    <span className="text-[10px] font-bold uppercase opacity-50">{t("products.stock")}:</span>
+                    <span
+                      className={`font-black px-1.5 py-0.5 rounded text-[11px]
+                          ${prod.stock <= 0
+                          ? "bg-error/20 text-error"
+                          : prod.stock <= (prod.minStockAlert ?? 5)
+                            ? "bg-warning/20 text-warning"
+                            : "bg-secondary/20 text-secondary"
+                        }`}
+                    >
+                      {prod.stock}
+                    </span>
+                  </div>
+
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => openEdit(prod)}
+                      className="btn btn-xs btn-ghost hover:text-primary transition-colors gap-1 uppercase text-[10px]"
+                    >
+                      <Edit2 size={12} /> {t("common.edit")}
+                    </button>
+
+                    <button
+                      onClick={() => openDelete(prod)}
+                      className="btn btn-xs btn-ghost text-error hover:bg-error/10 hover:text-error transition-all gap-1 uppercase text-[10px]"
+                    >
+                      <Trash2 size={12} /> {t("common.delete")}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+
+        {/* DESKTOP TABLE */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="table w-full">
             <thead>
               <tr className="bg-base-300/50 border-b border-base-300 text-[10px] uppercase tracking-widest opacity-50">

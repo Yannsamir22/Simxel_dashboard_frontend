@@ -274,11 +274,11 @@ const ExpenseManagement: React.FC = () => {
       {/* DELETE MODAL */}
       {deleteTarget && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
           onClick={() => setDeleteTarget(null)}
         >
           <div
-            className="bg-base-100 rounded-2xl shadow-xl border border-base-300 w-full max-w-sm sm:max-w-md mx-4 p-5 sm:p-6"
+            className="bg-base-100 rounded-2xl shadow-xl border border-base-300 w-full max-w-sm sm:max-w-md p-5 sm:p-6"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex flex-col items-center gap-4 text-center">
